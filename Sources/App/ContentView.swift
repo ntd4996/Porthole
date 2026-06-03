@@ -28,7 +28,7 @@ struct ContentView: View {
                 Text("Porthole").font(.headline)
                 Spacer()
                 Button { onRefresh() } label: { Image(systemName: "arrow.clockwise") }
-                    .buttonStyle(.borderless).help("Refresh")
+                    .buttonStyle(.plain).help("Refresh")
             }
             .padding(.horizontal, 12).padding(.top, 10).padding(.bottom, 4)
 

@@ -39,6 +39,10 @@ final class StatusBarController: NSObject, NSPopoverDelegate {
         }
     }
 
-    func popoverDidShow(_ notification: Notification) { coordinator.menuOpened() }
+    func popoverDidShow(_ notification: Notification) {
+        // Drop keyboard focus so no control draws a focus ring on open.
+        popover.contentViewController?.view.window?.makeFirstResponder(nil)
+        coordinator.menuOpened()
+    }
     func popoverDidClose(_ notification: Notification) { coordinator.menuClosed() }
 }

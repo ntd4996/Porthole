@@ -19,20 +19,20 @@ struct PortRowView: View {
                 }
                 Button { Actions.openInBrowser(port: port.port) } label: {
                     Image(systemName: "arrow.up.right.square")
-                }.buttonStyle(.borderless).help("Open in browser")
+                }.buttonStyle(.plain).help("Open in browser")
                 Button { Actions.copy("http://localhost:\(port.port)") } label: {
                     Image(systemName: "doc.on.doc")
-                }.buttonStyle(.borderless).help("Copy URL")
+                }.buttonStyle(.plain).help("Copy URL")
                 Button { confirmingKill = true } label: {
                     Image(systemName: "xmark.circle").foregroundStyle(.red)
-                }.buttonStyle(.borderless).help("Kill process")
+                }.buttonStyle(.plain).help("Kill process")
             }
             ForEach(port.tunnels, id: \.targetPort) { tunnel in
                 if let url = tunnel.publicURL {
                     Button { Actions.openURL(url) } label: {
                         Text("\(tunnel.provider.rawValue) \(url)")
                             .font(.caption).foregroundStyle(.blue).lineLimit(1)
-                    }.buttonStyle(.borderless)
+                    }.buttonStyle(.plain)
                 } else {
                     Text("\(tunnel.provider.rawValue) -> :\(tunnel.targetPort)")
                         .font(.caption).foregroundStyle(.secondary)
