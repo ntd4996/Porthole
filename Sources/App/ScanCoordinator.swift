@@ -1,7 +1,6 @@
 import Foundation
 import PortholeCore
 
-@available(macOS 14.0, *)
 @MainActor
 final class ScanCoordinator {
     private let state: AppState

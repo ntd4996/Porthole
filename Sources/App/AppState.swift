@@ -2,7 +2,6 @@ import Foundation
 import Observation
 import PortholeCore
 
-@available(macOS 14.0, *)
 @MainActor
 @Observable
 final class AppState {

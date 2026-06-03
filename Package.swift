@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "Porthole",
-    platforms: [.macOS(.v13)],
+    platforms: [.macOS(.v14)],
     targets: [
         .target(
             name: "PortholeCore",
