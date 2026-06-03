@@ -1,2 +1,0 @@
-import PortholeCore
-print("Porthole")
