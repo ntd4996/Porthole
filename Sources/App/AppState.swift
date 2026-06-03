@@ -1,0 +1,14 @@
+import Foundation
+import Observation
+import PortholeCore
+
+@available(macOS 14.0, *)
+@MainActor
+@Observable
+final class AppState {
+    var ports: [PortInfo] = []
+    var lastError: String?
+    var isScanning = false
+
+    var tunnelCount: Int { ports.reduce(0) { $0 + $1.tunnels.count } }
+}
