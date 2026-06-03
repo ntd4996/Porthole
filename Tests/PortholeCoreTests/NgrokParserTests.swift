@@ -16,6 +16,13 @@ final class NgrokParserTests: XCTestCase {
         ])
     }
 
+    func testParsesBarePortAddr() {
+        let json = Data(#"{"tunnels":[{"public_url":"https://x.ngrok.io","config":{"addr":"3000"}}]}"#.utf8)
+        XCTAssertEqual(NgrokParser.parse(json), [
+            TunnelInfo(provider: .ngrok, publicURL: "https://x.ngrok.io", targetPort: 3000),
+        ])
+    }
+
     func testHandlesEmptyAndBadJSON() {
         XCTAssertEqual(NgrokParser.parse(Data(#"{"tunnels":[]}"#.utf8)), [])
         XCTAssertEqual(NgrokParser.parse(Data("not json".utf8)), [])

@@ -16,7 +16,7 @@ public enum NgrokParser {
     }
 
     private static func port(fromAddr addr: String) -> Int? {
-        guard let colon = addr.lastIndex(of: ":") else { return nil }
+        guard let colon = addr.lastIndex(of: ":") else { return Int(addr) } // bare port, e.g. "3000"
         return Int(addr[addr.index(after: colon)...])
     }
 }

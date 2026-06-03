@@ -73,16 +73,20 @@ struct ScanService {
         var result: [TunnelInfo] = []
         for line in out.split(separator: "\n") {
             let cmd = String(line)
-            guard cmd.contains("cloudflared") else { continue }
-            if let port = CloudflaredParser.targetPort(fromCommandLine: cmd) {
+            if cmd.contains("cloudflared"),
+               let port = CloudflaredParser.targetPort(fromCommandLine: cmd) {
                 result.append(TunnelInfo(provider: .cloudflare, publicURL: nil, targetPort: port))
             }
-            if cmd.contains(" lt ") || cmd.hasSuffix(" lt"),
-               let lt = LocaltunnelParser.parse(fromCommandLine: cmd) {
+            if isLocaltunnel(cmd), let lt = LocaltunnelParser.parse(fromCommandLine: cmd) {
                 result.append(lt)
             }
         }
         return result
+    }
+
+    /// True when the command line invokes the localtunnel CLI (`lt` token or a `.../lt` path).
+    private func isLocaltunnel(_ cmd: String) -> Bool {
+        cmd.split(separator: " ").contains { $0 == "lt" || $0.hasSuffix("/lt") }
     }
 
     private func cloudflaredConfigTunnels() -> [TunnelInfo] {
