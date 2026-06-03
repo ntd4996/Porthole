@@ -1,23 +1,24 @@
 import SwiftUI
+import AppKit
 
-@MainActor
 @main
 struct PortholeApp: App {
-    @State private var state: AppState
-    @State private var coordinator: ScanCoordinator
-
-    init() {
-        let s = AppState()
-        _state = State(initialValue: s)
-        _coordinator = State(initialValue: ScanCoordinator(state: s))
-    }
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     var body: some Scene {
-        MenuBarExtra("Porthole", systemImage: "circle.circle") {
-            ContentView(state: state) { coordinator.refresh() }
-                .onAppear { coordinator.menuOpened() }
-                .onDisappear { coordinator.menuClosed() }
-        }
-        .menuBarExtraStyle(.window)
+        // The UI lives in a status-item popover managed by AppDelegate; this
+        // empty scene just satisfies the App protocol.
+        Settings { EmptyView() }
+    }
+}
+
+/// Runs the app as a menu bar accessory (no Dock icon) and starts the status item.
+@MainActor
+final class AppDelegate: NSObject, NSApplicationDelegate {
+    private let statusBar = StatusBarController()
+
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        NSApp.setActivationPolicy(.accessory)
+        statusBar.start()
     }
 }
