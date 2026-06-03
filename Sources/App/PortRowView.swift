@@ -9,8 +9,10 @@ struct PortRowView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             HStack(spacing: 8) {
-                Text(":\(port.port)").font(.system(.body, design: .monospaced)).bold()
-                Text(port.displayName).foregroundStyle(.secondary)
+                Text(verbatim: ":\(port.port)")
+                    .font(.system(.body, design: .monospaced)).bold()
+                    .frame(width: 64, alignment: .leading)
+                Text(port.displayName).foregroundStyle(.secondary).lineLimit(1)
                 Spacer()
                 if !port.tunnels.isEmpty {
                     Image(systemName: "globe").foregroundStyle(.blue)
