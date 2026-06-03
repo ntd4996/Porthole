@@ -57,5 +57,6 @@ struct ContentView: View {
             FooterView(portCount: state.ports.count, tunnelCount: state.tunnelCount)
         }
         .frame(width: 320)
+        .focusEffectDisabled()
     }
 }
