@@ -52,6 +52,17 @@ final class IgnoreStore {
         persist()
     }
 
+    /// Removes whichever rule (port number or process name) currently hides this port.
+    func unignoreMatching(_ port: PortInfo) {
+        rules.ports.remove(port.port)
+        for name in rules.processes where
+            name.caseInsensitiveCompare(port.command) == .orderedSame
+            || name.caseInsensitiveCompare(port.displayName) == .orderedSame {
+            rules.processes.remove(name)
+        }
+        persist()
+    }
+
     private func persist() {
         defaults.set(Array(rules.processes), forKey: processesKey)
         defaults.set(Array(rules.ports), forKey: portsKey)
