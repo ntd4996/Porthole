@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>Porthole</title>
+    <link>https://ntd4996.github.io/Porthole/appcast.xml</link>
+    <description>Most recent changes for Porthole.</description>
+    <language>en</language>
+    <item>
+      <title>0.1.2</title>
+      <pubDate>Thu, 04 Jun 2026 06:35:33 +0000</pubDate>
+      <sparkle:version>0.1.2</sparkle:version>
+      <sparkle:shortVersionString>0.1.2</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <enclosure url="https://github.com/ntd4996/Porthole/releases/download/v0.1.2/Porthole-0.1.2.dmg"
+                 sparkle:edSignature="aebNFcqvK2XzAk7eeucjJ7pb3MVtCIFjXIyexVrdfloIF4eq46HNsZegLlmbDcsr6Zie/QhaEbn9ags6G+MwBg==" length="2350332" type="application/octet-stream" />
+    </item>
+  </channel>
+</rss>
