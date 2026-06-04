@@ -3,6 +3,13 @@
 All notable changes to Porthole are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.1.2] - 2026-06-04
+
+### Added
+- Sparkle auto-update for the direct `.dmg` build: a "Check for Updates…" item in
+  the menu plus automatic background checks against the appcast. Homebrew installs
+  keep updating through `brew upgrade`. Universal binary (Apple Silicon + Intel).
+
 ## [0.1.1] - 2026-06-04
 
 ### Fixed
@@ -31,5 +38,6 @@ First public release.
   services; running-ignored ports shown in detail, with a rule manager.
 - Native popover UI (NSStatusItem + NSPopover) with open animation; accessory app (no Dock icon).
 
+[0.1.2]: https://github.com/ntd4996/Porthole/releases/tag/v0.1.2
 [0.1.1]: https://github.com/ntd4996/Porthole/releases/tag/v0.1.1
 [0.1.0]: https://github.com/ntd4996/Porthole/releases/tag/v0.1.0

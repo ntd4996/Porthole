@@ -10,19 +10,25 @@ VERSION="${VERSION:-0.1.0}"
 BUILD="${BUILD:-1}"
 EXEC="porthole"
 
-echo "==> [1/4] swift build -c release"
-swift build -c release
-BIN="$(swift build -c release --show-bin-path)/$EXEC"
+echo "==> [1/5] swift build -c release (universal arm64 + x86_64)"
+swift build -c release --arch arm64 --arch x86_64
+BINDIR="$(swift build -c release --arch arm64 --arch x86_64 --show-bin-path)"
+BIN="$BINDIR/$EXEC"
 
 APP="build/$APP_NAME.app"
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 
-echo "==> [2/4] Copy binary"
+echo "==> [2/5] Copy binary"
 cp "$BIN" "$APP/Contents/MacOS/$APP_NAME"
 chmod +x "$APP/Contents/MacOS/$APP_NAME"
 
-echo "==> [3/4] Generate AppIcon.icns"
+echo "==> [3/5] Embed Sparkle.framework"
+mkdir -p "$APP/Contents/Frameworks"
+ditto "$BINDIR/Sparkle.framework" "$APP/Contents/Frameworks/Sparkle.framework"
+install_name_tool -add_rpath "@executable_path/../Frameworks" "$APP/Contents/MacOS/$APP_NAME" 2>/dev/null || true
+
+echo "==> [4/5] Generate AppIcon.icns"
 ICONSET="build/AppIcon.iconset"
 rm -rf "$ICONSET"; mkdir -p "$ICONSET"
 SRC="assets/icon-1024.png"
@@ -41,7 +47,7 @@ cp "$ICONSET/icon_1024x1024.png" "$ICONSET/icon_512x512@2x.png"
 rm -f "$ICONSET/icon_64x64.png" "$ICONSET/icon_1024x1024.png"
 iconutil -c icns "$ICONSET" -o "$APP/Contents/Resources/AppIcon.icns"
 
-echo "==> [4/4] Write Info.plist"
+echo "==> [5/5] Write Info.plist"
 cat > "$APP/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -59,6 +65,9 @@ cat > "$APP/Contents/Info.plist" <<PLIST
   <key>LSUIElement</key><true/>
   <key>NSHighResolutionCapable</key><true/>
   <key>NSHumanReadableCopyright</key><string>Copyright © 2026 Dat Nguyen. MIT Licensed.</string>
+  <key>SUEnableAutomaticChecks</key><true/>
+  <key>SUFeedURL</key><string>https://ntd4996.github.io/Porthole/appcast.xml</string>
+  <key>SUPublicEDKey</key><string>2wE8euYD3TUI39c6UhWHbYlhHpXkeM5NiJTJywrm0xQ=</string>
 </dict>
 </plist>
 PLIST

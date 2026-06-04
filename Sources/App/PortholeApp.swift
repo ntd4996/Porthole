@@ -20,5 +20,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
         statusBar.start()
+        _ = UpdaterController.shared   // start Sparkle background update checks
     }
 }

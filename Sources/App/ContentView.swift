@@ -26,6 +26,12 @@ struct ContentView: View {
                 Spacer()
                 Button { onRefresh() } label: { Image(systemName: "arrow.clockwise") }
                     .buttonStyle(.plain).help("Refresh")
+                Menu {
+                    Button("Check for Updates…") { UpdaterController.shared.checkForUpdates() }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                }
+                .buttonStyle(.plain).menuIndicator(.hidden).fixedSize().help("More")
             }
             .padding(.horizontal, 12).padding(.top, 10).padding(.bottom, 8)
 

@@ -16,8 +16,23 @@ DMG="build/Porthole-$VERSION.dmg"
 VERSION="$VERSION" ./scripts/build-app.sh
 
 echo "==> Signing app (hardened runtime, timestamp)"
+# Sparkle.framework ships nested XPC services + helper apps that must be signed
+# inside-out (deepest first) before the framework, exe, and app.
+SPARKLE="$APP/Contents/Frameworks/Sparkle.framework"
+if [[ -d "$SPARKLE" ]]; then
+  SV="$SPARKLE/Versions/B"
+  for nested in \
+    "$SV/XPCServices/Downloader.xpc" \
+    "$SV/XPCServices/Installer.xpc" \
+    "$SV/Autoupdate" \
+    "$SV/Updater.app"; do
+    codesign --force --options runtime --timestamp --sign "$IDENT" "$nested"
+  done
+  codesign --force --options runtime --timestamp --sign "$IDENT" "$SPARKLE"
+fi
+codesign --force --options runtime --timestamp --sign "$IDENT" "$APP/Contents/MacOS/Porthole"
 codesign --force --options runtime --timestamp --sign "$IDENT" "$APP"
-codesign --verify --strict --verbose=2 "$APP" 2>&1 | tail -2
+codesign --verify --deep --strict --verbose=2 "$APP" 2>&1 | tail -2
 
 echo "==> Notarizing app"
 ZIP="build/Porthole-notarize.zip"
@@ -69,7 +84,34 @@ xcrun stapler staple "$DMG"
 xcrun stapler validate "$DMG"
 
 SHA=$(shasum -a 256 "$DMG" | awk '{print $1}')
+
+echo "==> Generating Sparkle appcast (landing/appcast.xml)"
+SIGN_UPDATE="$(find .build/artifacts -name sign_update -path '*Sparkle*' 2>/dev/null | head -1)"
+ED_ATTRS="$("$SIGN_UPDATE" "$DMG")"   # sparkle:edSignature="..." length="..."
+PUBDATE="$(date -u +"%a, %d %b %Y %H:%M:%S +0000")"
+cat > landing/appcast.xml <<XML
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>Porthole</title>
+    <link>https://ntd4996.github.io/Porthole/appcast.xml</link>
+    <description>Most recent changes for Porthole.</description>
+    <language>en</language>
+    <item>
+      <title>$VERSION</title>
+      <pubDate>$PUBDATE</pubDate>
+      <sparkle:version>$VERSION</sparkle:version>
+      <sparkle:shortVersionString>$VERSION</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <enclosure url="https://github.com/ntd4996/Porthole/releases/download/v$VERSION/Porthole-$VERSION.dmg"
+                 $ED_ATTRS type="application/octet-stream" />
+    </item>
+  </channel>
+</rss>
+XML
+
 echo ""
 echo "✅ Release ready:"
 echo "   $DMG"
 echo "   sha256: $SHA"
+echo "   appcast: landing/appcast.xml (commit + redeploy gh-pages)"
