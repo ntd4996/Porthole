@@ -5,6 +5,7 @@ struct ProjectGroupView: View {
     let title: String
     let kind: ProjectKind?
     let ports: [PortInfo]
+    let ignore: IgnoreStore
     var onRefresh: () -> Void
 
     var body: some View {
@@ -17,7 +18,7 @@ struct ProjectGroupView: View {
             }
             .padding(.top, 6)
             ForEach(ports) { port in
-                PortRowView(port: port, onRefresh: onRefresh)
+                PortRowView(port: port, ignore: ignore, onRefresh: onRefresh)
             }
         }
     }

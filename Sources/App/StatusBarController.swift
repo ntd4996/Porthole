@@ -9,6 +9,7 @@ final class StatusBarController: NSObject, NSPopoverDelegate {
     private var statusItem: NSStatusItem?
     private let popover = NSPopover()
     private let state = AppState()
+    private let ignore = IgnoreStore()
     private lazy var coordinator = ScanCoordinator(state: state)
 
     func start() {
@@ -23,7 +24,7 @@ final class StatusBarController: NSObject, NSPopoverDelegate {
         popover.behavior = .transient
         popover.animates = true
         popover.delegate = self
-        let host = NSHostingController(rootView: ContentView(state: state) { [weak self] in
+        let host = NSHostingController(rootView: ContentView(state: state, ignore: ignore) { [weak self] in
             self?.coordinator.refresh()
         })
         host.sizingOptions = [.preferredContentSize]

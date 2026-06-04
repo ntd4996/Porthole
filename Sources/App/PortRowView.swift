@@ -3,6 +3,7 @@ import PortholeCore
 
 struct PortRowView: View {
     let port: PortInfo
+    let ignore: IgnoreStore
     var onRefresh: () -> Void
     @State private var confirmingKill = false
 
@@ -23,6 +24,9 @@ struct PortRowView: View {
                 Button { Actions.copy("http://localhost:\(port.port)") } label: {
                     Image(systemName: "doc.on.doc")
                 }.buttonStyle(.plain).help("Copy URL")
+                Button { ignore.ignoreProcess(port.command) } label: {
+                    Image(systemName: "eye.slash")
+                }.buttonStyle(.plain).help("Ignore process \(port.command)")
                 Button { confirmingKill = true } label: {
                     Image(systemName: "xmark.circle").foregroundStyle(.red)
                 }.buttonStyle(.plain).help("Kill process")
@@ -40,6 +44,10 @@ struct PortRowView: View {
             }
         }
         .padding(.vertical, 2)
+        .contextMenu {
+            Button("Ignore process \(port.command)") { ignore.ignoreProcess(port.command) }
+            Button("Ignore port \(port.port)") { ignore.ignorePort(port.port) }
+        }
         .confirmationDialog("Kill PID \(port.pid)?", isPresented: $confirmingKill) {
             Button("Kill", role: .destructive) {
                 Actions.kill(pid: port.pid)
