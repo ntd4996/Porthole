@@ -6,6 +6,7 @@
 
 **See which dev ports are running, which project owns each one, and which tunnels point where, right from your menu bar.**
 
+[![CI](https://github.com/ntd4996/Porthole/actions/workflows/ci.yml/badge.svg)](https://github.com/ntd4996/Porthole/actions/workflows/ci.yml)
 [![Download](https://img.shields.io/github/v/release/ntd4996/Porthole?label=download&color=0E7490)](https://github.com/ntd4996/Porthole/releases/latest)
 [![Platform](https://img.shields.io/badge/macOS-14%2B-blue)](https://github.com/ntd4996/Porthole/releases/latest)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
