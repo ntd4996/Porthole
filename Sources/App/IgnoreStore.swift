@@ -12,23 +12,40 @@ final class IgnoreStore {
     private let defaults = UserDefaults.standard
     private let processesKey = "porthole.ignore.processes"
     private let portsKey = "porthole.ignore.ports"
+    private let seedVersionKey = "porthole.ignore.seedVersion"
 
-    /// Noisy macOS system services that hold ports but are never dev servers.
+    /// Bump when new entries are added to `defaultProcesses` so existing installs
+    /// pick them up once (without clobbering the user's own removals afterwards).
+    private static let seedVersion = 2
+
+    /// Noisy macOS system services / apps that hold ports but are never dev servers.
     static let defaultProcesses = [
         "ControlCenter", "rapportd", "sharingd", "AirPlayXPCHelper",
         "remoted", "identityservicesd",
+        "Raycast", "Cursor Helper (Plugin)", "Discord Helper (Renderer)",
     ]
 
     init() {
         if defaults.object(forKey: processesKey) == nil,
            defaults.object(forKey: portsKey) == nil {
             rules = IgnoreRules(processes: Set(Self.defaultProcesses), ports: [])
+            defaults.set(Self.seedVersion, forKey: seedVersionKey)
             persist()
         } else {
             let procs = defaults.stringArray(forKey: processesKey) ?? []
             let ports = (defaults.array(forKey: portsKey) as? [Int]) ?? []
             rules = IgnoreRules(processes: Set(procs), ports: Set(ports))
+            migrateSeedIfNeeded()
         }
+    }
+
+    /// One-time merge of newly-added default processes for older installs.
+    private func migrateSeedIfNeeded() {
+        let stored = defaults.integer(forKey: seedVersionKey)
+        guard stored < Self.seedVersion else { return }
+        rules.processes.formUnion(Self.defaultProcesses)
+        defaults.set(Self.seedVersion, forKey: seedVersionKey)
+        persist()
     }
 
     func ignoreProcess(_ name: String) {
