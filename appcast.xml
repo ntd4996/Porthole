@@ -6,13 +6,13 @@
     <description>Most recent changes for Porthole.</description>
     <language>en</language>
     <item>
-      <title>0.1.2</title>
-      <pubDate>Thu, 04 Jun 2026 06:35:33 +0000</pubDate>
-      <sparkle:version>0.1.2</sparkle:version>
-      <sparkle:shortVersionString>0.1.2</sparkle:shortVersionString>
+      <title>1.0.0</title>
+      <pubDate>Thu, 04 Jun 2026 06:37:45 +0000</pubDate>
+      <sparkle:version>1.0.0</sparkle:version>
+      <sparkle:shortVersionString>1.0.0</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-      <enclosure url="https://github.com/ntd4996/Porthole/releases/download/v0.1.2/Porthole-0.1.2.dmg"
-                 sparkle:edSignature="aebNFcqvK2XzAk7eeucjJ7pb3MVtCIFjXIyexVrdfloIF4eq46HNsZegLlmbDcsr6Zie/QhaEbn9ags6G+MwBg==" length="2350332" type="application/octet-stream" />
+      <enclosure url="https://github.com/ntd4996/Porthole/releases/download/v1.0.0/Porthole-1.0.0.dmg"
+                 sparkle:edSignature="947sNy9/XAvO3gy8JQJfhfB0ayDzWpv4xJVQLtZdBms1U/UuLtYtYRi1ddPeLqKsutUolNCLtzthM3NHt/xVDA==" length="2350315" type="application/octet-stream" />
     </item>
   </channel>
 </rss>
