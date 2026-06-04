@@ -12,6 +12,11 @@ final class StatusBarController: NSObject, NSPopoverDelegate {
     private let ignore = IgnoreStore()
     private lazy var coordinator = ScanCoordinator(state: state)
 
+    /// Closes the popover when the user clicks anywhere outside it (including
+    /// other apps / the desktop), which a transient popover can miss for a
+    /// non-activating menu bar app.
+    private var outsideClickMonitor: Any?
+
     func start() {
         let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         let icon = NSImage(systemSymbolName: "circle.circle", accessibilityDescription: "Porthole")
@@ -43,7 +48,19 @@ final class StatusBarController: NSObject, NSPopoverDelegate {
     func popoverDidShow(_ notification: Notification) {
         // Drop keyboard focus so no control draws a focus ring on open.
         popover.contentViewController?.view.window?.makeFirstResponder(nil)
+        outsideClickMonitor = NSEvent.addGlobalMonitorForEvents(
+            matching: [.leftMouseDown, .rightMouseDown]
+        ) { [weak self] _ in
+            self?.popover.performClose(nil)
+        }
         coordinator.menuOpened()
     }
-    func popoverDidClose(_ notification: Notification) { coordinator.menuClosed() }
+
+    func popoverDidClose(_ notification: Notification) {
+        if let monitor = outsideClickMonitor {
+            NSEvent.removeMonitor(monitor)
+            outsideClickMonitor = nil
+        }
+        coordinator.menuClosed()
+    }
 }

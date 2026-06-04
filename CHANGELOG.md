@@ -3,6 +3,18 @@
 All notable changes to Porthole are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.1.1] - 2026-06-04
+
+### Fixed
+- Popover now closes when you click anywhere outside it (a global mouse monitor,
+  the same approach AgentPet uses, since a transient popover can miss outside
+  clicks for a non-activating menu bar app).
+
+### Changed
+- App icon now follows the macOS icon grid (rounded squircle with margin) so it
+  sits correctly among other apps instead of filling the tile edge to edge.
+- DMG opens to a styled "drag Porthole to Applications" window with a background.
+
 ## [0.1.0] - 2026-06-04
 
 First public release.
@@ -19,4 +31,5 @@ First public release.
   services; running-ignored ports shown in detail, with a rule manager.
 - Native popover UI (NSStatusItem + NSPopover) with open animation; accessory app (no Dock icon).
 
+[0.1.1]: https://github.com/ntd4996/Porthole/releases/tag/v0.1.1
 [0.1.0]: https://github.com/ntd4996/Porthole/releases/tag/v0.1.0

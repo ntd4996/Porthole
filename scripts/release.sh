@@ -33,14 +33,27 @@ if [[ "$STATUS" != "Accepted" ]]; then
 fi
 xcrun stapler staple "$APP"
 
-echo "==> Building DMG"
+echo "==> Building DMG (drag-to-Applications background)"
 rm -f "$DMG"
-STAGE="build/dmg-stage"
+rsvg-convert -w 660  -h 420 assets/dmg-bg.svg -o build/dmg-bg.png
+rsvg-convert -w 1320 -h 840 assets/dmg-bg.svg -o build/dmg-bg@2x.png
+tiffutil -cathidpicheck build/dmg-bg.png build/dmg-bg@2x.png -out build/dmg-bg.tiff >/dev/null 2>&1
+STAGE="build/dmg-src"
 rm -rf "$STAGE"; mkdir -p "$STAGE"
 cp -R "$APP" "$STAGE/"
-ln -s /Applications "$STAGE/Applications"
-hdiutil create -volname "Porthole" -srcfolder "$STAGE" -ov -format UDZO "$DMG" >/dev/null
+create-dmg \
+  --volname "Porthole" \
+  --background "build/dmg-bg.tiff" \
+  --window-pos 200 120 \
+  --window-size 660 420 \
+  --icon-size 120 \
+  --icon "Porthole.app" 165 215 \
+  --app-drop-link 495 215 \
+  --hide-extension "Porthole.app" \
+  --no-internet-enable \
+  "$DMG" "$STAGE" || true
 rm -rf "$STAGE"
+[[ -f "$DMG" ]] || { echo "❌ DMG not created"; exit 1; }
 
 echo "==> Signing + notarizing DMG"
 codesign --force --sign "$IDENT" "$DMG"

@@ -24,6 +24,8 @@
     <clipPath id="glassClip"><circle cx="512" cy="512" r="262"/></clipPath>
   </defs>
 
+  <!-- macOS icon grid: 824 body centered in 1024 with transparent margin -->
+  <g transform="translate(100,100) scale(0.8046875)">
   <!-- background squircle -->
   <rect x="0" y="0" width="1024" height="1024" rx="228" ry="228" fill="url(#bg)"/>
 
@@ -73,5 +75,6 @@
     <circle cx="293" cy="731" r="14"/>
     <circle cx="202" cy="512" r="14"/>
     <circle cx="293" cy="293" r="14"/>
+  </g>
   </g>
 </svg>
