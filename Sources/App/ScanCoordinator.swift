@@ -13,6 +13,7 @@ final class ScanCoordinator {
     }
 
     func refresh() {
+        state.isScanning = true
         Task { await performScan() }
     }
 
@@ -34,5 +35,6 @@ final class ScanCoordinator {
         let ports = await service.scan()
         state.ports = ports
         state.isScanning = false
+        state.didScan = true
     }
 }

@@ -71,9 +71,9 @@ struct PortRowView: View {
         color: Color = .secondary, action: @escaping () -> Void
     ) -> some View {
         Button(action: action) {
-            Image(systemName: name).foregroundStyle(color)
+            Image(systemName: name)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(IconButtonStyle(color: color))
         .help(help)
     }
 

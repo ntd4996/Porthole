@@ -5,12 +5,15 @@ struct FooterView: View {
     let tunnelCount: Int
 
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
             Text("\(portCount) ports · \(tunnelCount) tunnels")
                 .font(.caption).foregroundStyle(.secondary)
-            Spacer()
+            Spacer(minLength: 8)
+            Button("Check for Updates") { UpdaterController.shared.checkForUpdates() }
+                .buttonStyle(HoverTextButtonStyle())
+                .help("Check for a newer version")
             Button("Quit") { NSApplication.shared.terminate(nil) }
-                .buttonStyle(.borderless)
+                .buttonStyle(HoverTextButtonStyle())
         }
         .padding(.horizontal, 12).padding(.vertical, 8)
     }

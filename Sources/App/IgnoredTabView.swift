@@ -33,7 +33,7 @@ struct IgnoredTabView: View {
             }
 
             if ignoredPorts.isEmpty && uncoveredProcesses.isEmpty && uncoveredPorts.isEmpty {
-                Text("Chưa ignore gì")
+                Text("Nothing ignored")
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.vertical, 24)
@@ -45,7 +45,7 @@ struct IgnoredTabView: View {
 
     private var rulesCard: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Rules (không chạy)")
+            Text("Rules (not running)")
                 .font(.subheadline.weight(.semibold))
                 .padding(.horizontal, 10).padding(.top, 8).padding(.bottom, 2)
 
@@ -67,8 +67,8 @@ struct IgnoredTabView: View {
                 .font(mono ? .system(.callout, design: .monospaced) : .body)
                 .lineLimit(1)
             Spacer()
-            Button(action: remove) { Image(systemName: "eye").foregroundStyle(.secondary) }
-                .buttonStyle(.plain).help("Un-ignore")
+            Button(action: remove) { Image(systemName: "eye") }
+                .buttonStyle(IconButtonStyle()).help("Un-ignore")
         }
         .padding(.horizontal, 10).padding(.vertical, 5)
     }

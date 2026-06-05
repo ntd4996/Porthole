@@ -25,13 +25,7 @@ struct ContentView: View {
                 Text("Porthole").font(.headline)
                 Spacer()
                 Button { onRefresh() } label: { Image(systemName: "arrow.clockwise") }
-                    .buttonStyle(.plain).help("Refresh")
-                Menu {
-                    Button("Check for Updates…") { UpdaterController.shared.checkForUpdates() }
-                } label: {
-                    Image(systemName: "ellipsis.circle")
-                }
-                .buttonStyle(.plain).menuIndicator(.hidden).fixedSize().help("More")
+                    .buttonStyle(IconButtonStyle()).help("Refresh ports")
             }
             .padding(.horizontal, 12).padding(.top, 10).padding(.bottom, 8)
 
@@ -65,11 +59,22 @@ struct ContentView: View {
     }
 
     @ViewBuilder private var portsTab: some View {
-        if visiblePorts.isEmpty {
-            emptyState("Không có dev port nào đang chạy")
-        } else {
+        if !visiblePorts.isEmpty {
             PortListView(ports: visiblePorts, mode: .normal, ignore: ignore, onRefresh: onRefresh)
+        } else if !state.didScan {
+            loadingView
+        } else {
+            emptyState("No dev ports running")
         }
+    }
+
+    private var loadingView: some View {
+        VStack(spacing: 10) {
+            ProgressView().controlSize(.small)
+            Text("Scanning ports…").font(.caption).foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity, alignment: .center)
+        .padding(.vertical, 28)
     }
 
     private func emptyState(_ text: String) -> some View {
