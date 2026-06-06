@@ -6,8 +6,10 @@ cd "$(dirname "$0")/.."
 
 APP_NAME="Porthole"
 BUNDLE_ID="com.datnt.porthole"
+# CFBundleVersion must match the appcast's sparkle:version (release.sh writes $VERSION),
+# otherwise Sparkle keeps offering the same release forever. Keep them equal.
 VERSION="${VERSION:-0.1.0}"
-BUILD="${BUILD:-1}"
+BUILD="${BUILD:-$VERSION}"
 EXEC="porthole"
 
 echo "==> [1/5] swift build -c release (universal arm64 + x86_64)"

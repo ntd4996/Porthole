@@ -3,6 +3,14 @@
 All notable changes to Porthole are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.0.2] - 2026-06-06
+
+### Fixed
+- Sparkle no longer offers the same release over and over. The bundle's
+  `CFBundleVersion` was hardcoded to `1` while the appcast advertised the full
+  version, so Sparkle always thought a newer build was available even right after
+  updating. `CFBundleVersion` now matches the appcast version.
+
 ## [1.0.1] - 2026-06-05
 
 ### Added
@@ -53,6 +61,7 @@ First public release.
   services; running-ignored ports shown in detail, with a rule manager.
 - Native popover UI (NSStatusItem + NSPopover) with open animation; accessory app (no Dock icon).
 
+[1.0.2]: https://github.com/ntd4996/Porthole/releases/tag/v1.0.2
 [1.0.1]: https://github.com/ntd4996/Porthole/releases/tag/v1.0.1
 [1.0.0]: https://github.com/ntd4996/Porthole/releases/tag/v1.0.0
 [0.1.1]: https://github.com/ntd4996/Porthole/releases/tag/v0.1.1
