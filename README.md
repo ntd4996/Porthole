@@ -11,6 +11,8 @@
 [![Platform](https://img.shields.io/badge/macOS-14%2B-blue)](https://github.com/ntd4996/Porthole/releases/latest)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
+**English** · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
+
 <img src="assets/hero.png" width="640" alt="Porthole popover" />
 
 </div>
