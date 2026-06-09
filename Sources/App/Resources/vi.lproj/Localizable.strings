@@ -1,0 +1,40 @@
+/* Header */
+"Refresh ports" = "Làm mới cổng";
+
+/* Tabs */
+"Ports" = "Cổng";
+"Ignored" = "Đã ẩn";
+
+/* Ports tab states */
+"Scanning ports…" = "Đang quét cổng…";
+"No dev ports running" = "Không có cổng dev nào đang chạy";
+"Other" = "Khác";
+
+/* Footer */
+"%lld ports · %lld tunnels" = "%1$lld cổng · %2$lld tunnel";
+"Check for Updates" = "Kiểm tra cập nhật";
+"Check for a newer version" = "Kiểm tra phiên bản mới";
+"Quit" = "Thoát";
+
+/* Port row actions */
+"Open in browser" = "Mở trong trình duyệt";
+"Copy URL" = "Sao chép URL";
+"Kill process" = "Tắt tiến trình";
+"Un-ignore" = "Bỏ ẩn";
+"Ignore %@" = "Ẩn %@";
+"Ignore process %@" = "Ẩn tiến trình %@";
+"Ignore port %lld" = "Ẩn cổng %lld";
+"Kill PID %lld?" = "Tắt PID %lld?";
+"Kill" = "Tắt";
+
+/* Status bar menu */
+"Open Porthole" = "Mở Porthole";
+"Refresh" = "Làm mới";
+"Check for Updates…" = "Kiểm tra cập nhật…";
+"Quit Porthole" = "Thoát Porthole";
+
+/* Ignored tab */
+"Nothing ignored" = "Chưa ẩn gì";
+"Rules (not running)" = "Quy tắc (không chạy)";
+"Ignore a port…" = "Ẩn một cổng…";
+"Add" = "Thêm";
