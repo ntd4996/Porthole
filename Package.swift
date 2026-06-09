@@ -3,6 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "Porthole",
+    defaultLocalization: "en",
     platforms: [.macOS(.v14)],
     dependencies: [
         .package(url: "https://github.com/sparkle-project/Sparkle", from: "2.6.0"),
@@ -15,7 +16,8 @@ let package = Package(
         .executableTarget(
             name: "porthole",
             dependencies: ["PortholeCore", .product(name: "Sparkle", package: "Sparkle")],
-            path: "Sources/App"
+            path: "Sources/App",
+            resources: [.process("Resources")]
         ),
         .testTarget(
             name: "PortholeCoreTests",

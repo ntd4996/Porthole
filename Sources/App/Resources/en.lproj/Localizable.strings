@@ -1,0 +1,40 @@
+/* Header */
+"Refresh ports" = "Refresh ports";
+
+/* Tabs */
+"Ports" = "Ports";
+"Ignored" = "Ignored";
+
+/* Ports tab states */
+"Scanning ports…" = "Scanning ports…";
+"No dev ports running" = "No dev ports running";
+"Other" = "Other";
+
+/* Footer */
+"%lld ports · %lld tunnels" = "%1$lld ports · %2$lld tunnels";
+"Check for Updates" = "Check for Updates";
+"Check for a newer version" = "Check for a newer version";
+"Quit" = "Quit";
+
+/* Port row actions */
+"Open in browser" = "Open in browser";
+"Copy URL" = "Copy URL";
+"Kill process" = "Kill process";
+"Un-ignore" = "Un-ignore";
+"Ignore %@" = "Ignore %@";
+"Ignore process %@" = "Ignore process %@";
+"Ignore port %lld" = "Ignore port %lld";
+"Kill PID %lld?" = "Kill PID %lld?";
+"Kill" = "Kill";
+
+/* Status bar menu */
+"Open Porthole" = "Open Porthole";
+"Refresh" = "Refresh";
+"Check for Updates…" = "Check for Updates…";
+"Quit Porthole" = "Quit Porthole";
+
+/* Ignored tab */
+"Nothing ignored" = "Nothing ignored";
+"Rules (not running)" = "Rules (not running)";
+"Ignore a port…" = "Ignore a port…";
+"Add" = "Add";
