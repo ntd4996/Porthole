@@ -25,13 +25,13 @@ struct ContentView: View {
                 Text("Porthole").font(.headline)
                 Spacer()
                 Button { onRefresh() } label: { Image(systemName: "arrow.clockwise") }
-                    .buttonStyle(IconButtonStyle()).help("Refresh ports")
+                    .buttonStyle(IconButtonStyle()).help(loc("Refresh ports"))
             }
             .padding(.horizontal, 12).padding(.top, 10).padding(.bottom, 8)
 
             Picker("", selection: $tab) {
-                Text("Ports").tag(Tab.ports)
-                Text("Ignored").tag(Tab.ignored)
+                Text(loc("Ports")).tag(Tab.ports)
+                Text(loc("Ignored")).tag(Tab.ignored)
             }
             .pickerStyle(.segmented)
             .labelsHidden()
@@ -64,14 +64,14 @@ struct ContentView: View {
         } else if !state.didScan {
             loadingView
         } else {
-            emptyState("No dev ports running")
+            emptyState(loc("No dev ports running"))
         }
     }
 
     private var loadingView: some View {
         VStack(spacing: 10) {
             ProgressView().controlSize(.small)
-            Text("Scanning ports…").font(.caption).foregroundStyle(.secondary)
+            Text(loc("Scanning ports…")).font(.caption).foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity, alignment: .center)
         .padding(.vertical, 28)
