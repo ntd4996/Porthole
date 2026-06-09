@@ -35,11 +35,17 @@
   .brand img{width:30px;height:30px;border-radius:8px}
   nav.links{display:flex;gap:26px;font-size:14px}
   nav.links a{color:var(--muted)} nav.links a:hover{color:var(--cream)}
+  .right{display:flex;align-items:center;gap:14px}
   .btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:600;font-size:14px;padding:10px 18px;transition:.15s}
   .btn-primary{background:linear-gradient(100deg,var(--sky),var(--teal));color:#06243a}
   .btn-primary:hover{filter:brightness(1.07);transform:translateY(-1px)}
   .btn-ghost{border:1px solid var(--line);color:var(--cream)}
   .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+  /* language switcher */
+  .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .lang button{background:transparent;border:none;color:var(--muted);cursor:pointer;font:inherit;font-size:12.5px;font-weight:600;padding:7px 11px;transition:.15s}
+  .lang button:hover{color:var(--cream)}
+  .lang button.on{background:rgba(45,212,191,.16);color:var(--teal)}
   @media(max-width:720px){nav.links{display:none}}
 
   /* glows */
@@ -105,24 +111,31 @@
   <div class="wrap">
     <a class="brand" href="#"><img src="icon.png" alt="" />Porthole</a>
     <nav class="links">
-      <a href="#features">Features</a>
-      <a href="#how">How it works</a>
-      <a href="#install">Install</a>
+      <a href="#features" data-i18n="nav_features">Features</a>
+      <a href="#how" data-i18n="nav_how">How it works</a>
+      <a href="#install" data-i18n="nav_install">Install</a>
       <a href="https://github.com/ntd4996/Porthole">GitHub</a>
     </nav>
-    <a class="btn btn-primary" href="https://github.com/ntd4996/Porthole/releases/latest">Download</a>
+    <div class="right">
+      <div class="lang" id="lang">
+        <button data-lang="en">EN</button>
+        <button data-lang="vi">VI</button>
+        <button data-lang="zh">中</button>
+      </div>
+      <a class="btn btn-primary" href="https://github.com/ntd4996/Porthole/releases/latest" data-i18n="nav_download">Download</a>
+    </div>
   </div>
 </header>
 
 <section class="hero">
   <span class="glow a"></span><span class="glow b"></span>
   <div class="wrap">
-    <span class="badge"><span class="dot"></span>macOS 14+ · Apple Silicon &amp; Intel · Free &amp; open source</span>
-    <h1>Your dev ports,<br/><span class="grad">at a glance.</span></h1>
-    <p class="sub">A macOS menu bar app that shows which ports are running, which project owns each one, and which tunnels point where.</p>
+    <span class="badge" data-i18n="badge"><span class="dot"></span>macOS 14+ · Apple Silicon &amp; Intel · Free &amp; open source</span>
+    <h1 data-i18n="h1">Your dev ports,<br/><span class="grad">at a glance.</span></h1>
+    <p class="sub" data-i18n="sub">A macOS menu bar app that shows which ports are running, which project owns each one, and which tunnels point where.</p>
     <div class="cta">
-      <a class="btn btn-primary" href="https://github.com/ntd4996/Porthole/releases/latest">Download for macOS</a>
-      <span class="brew"><span id="brew">brew install --cask ntd4996/tap/porthole</span><button onclick="cp('brew',this)">Copy</button></span>
+      <a class="btn btn-primary" href="https://github.com/ntd4996/Porthole/releases/latest" data-i18n="hero_dl">Download for macOS</a>
+      <span class="brew"><span id="brew">brew install --cask ntd4996/tap/porthole</span><button onclick="cp('brew',this)" data-i18n="copy">Copy</button></span>
     </div>
     <div class="shotwrap reveal">
       <span class="glow"></span>
@@ -134,26 +147,26 @@
 <section class="block" id="features">
   <div class="wrap">
     <div class="reveal">
-      <div class="eyebrow">Everything in one place</div>
-      <h2>Stop running <span class="grad">lsof -i</span> by hand.</h2>
-      <p class="lead">Porthole keeps a live, readable list of your local dev world in the menu bar, refreshed while it's open.</p>
+      <div class="eyebrow" data-i18n="f_eyebrow">Everything in one place</div>
+      <h2 data-i18n="f_h2">Stop running <span class="grad">lsof -i</span> by hand.</h2>
+      <p class="lead" data-i18n="f_lead">Porthole keeps a live, readable list of your local dev world in the menu bar, refreshed while it's open.</p>
     </div>
     <div class="features">
-      <div class="feat reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></div><h3>Grouped by project</h3><p>Every listening dev port with the process behind it, grouped under the project that owns it, resolved from the process working directory.</p></div>
-      <div class="feat reveal"><div class="ic" style="background:rgba(86,205,132,.12);color:var(--green)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h3>Tunnels, mapped to ports</h3><p>ngrok, Cloudflare Tunnel, Tailscale and localtunnel detected automatically, each public URL one click away.</p></div>
-      <div class="feat reveal"><div class="ic" style="background:rgba(240,163,90,.12);color:var(--orange)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9l5 12 1.8-5.2L21 14Z"/><path d="M7.2 2.2 8 5.1"/><path d="m5.1 8-2.9-.8"/><path d="M14 4.1 12 6"/><path d="m6 12-1.9 2"/></svg></div><h3>One-click actions</h3><p>Open <code>localhost:PORT</code> in the browser, copy the URL, or kill the process, straight from the row.</p></div>
-      <div class="feat reveal"><div class="ic" style="background:rgba(167,139,250,.14);color:#a78bfa"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg></div><h3>Ignore the noise</h3><p>Hide system services like ControlCenter and rapportd by name or port. Seeded with sensible defaults, fully editable.</p></div>
-      <div class="feat reveal"><div class="ic" style="background:rgba(45,212,191,.14);color:var(--teal)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></div><h3>Native &amp; light</h3><p>A real menu bar popover with a smooth open animation. No Dock icon, no background hog.</p></div>
-      <div class="feat reveal"><div class="ic" style="background:rgba(148,171,194,.14);color:#aebfd2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg></div><h3>No magic, no privileges</h3><p>Just reads <code>lsof</code> / <code>ps</code> and tunnel tools. No kernel extensions, no elevated access.</p></div>
+      <div class="feat reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></div><h3 data-i18n="feat1_h3">Grouped by project</h3><p data-i18n="feat1_p">Every listening dev port with the process behind it, grouped under the project that owns it, resolved from the process working directory.</p></div>
+      <div class="feat reveal"><div class="ic" style="background:rgba(86,205,132,.12);color:var(--green)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h3 data-i18n="feat2_h3">Tunnels, mapped to ports</h3><p data-i18n="feat2_p">ngrok, Cloudflare Tunnel, Tailscale and localtunnel detected automatically, each public URL one click away.</p></div>
+      <div class="feat reveal"><div class="ic" style="background:rgba(240,163,90,.12);color:var(--orange)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9l5 12 1.8-5.2L21 14Z"/><path d="M7.2 2.2 8 5.1"/><path d="m5.1 8-2.9-.8"/><path d="M14 4.1 12 6"/><path d="m6 12-1.9 2"/></svg></div><h3 data-i18n="feat3_h3">One-click actions</h3><p data-i18n="feat3_p">Open <code>localhost:PORT</code> in the browser, copy the URL, or kill the process, straight from the row.</p></div>
+      <div class="feat reveal"><div class="ic" style="background:rgba(167,139,250,.14);color:#a78bfa"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg></div><h3 data-i18n="feat4_h3">Ignore the noise</h3><p data-i18n="feat4_p">Hide system services like ControlCenter and rapportd by name or port. Seeded with sensible defaults, fully editable.</p></div>
+      <div class="feat reveal"><div class="ic" style="background:rgba(45,212,191,.14);color:var(--teal)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></div><h3 data-i18n="feat5_h3">Native &amp; light</h3><p data-i18n="feat5_p">A real menu bar popover with a smooth open animation. No Dock icon, no background hog.</p></div>
+      <div class="feat reveal"><div class="ic" style="background:rgba(148,171,194,.14);color:#aebfd2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg></div><h3 data-i18n="feat6_h3">No magic, no privileges</h3><p data-i18n="feat6_p">Just reads <code>lsof</code> / <code>ps</code> and tunnel tools. No kernel extensions, no elevated access.</p></div>
     </div>
   </div>
 </section>
 
 <section class="block" id="how">
   <div class="wrap reveal">
-    <div class="eyebrow">Under the hood</div>
-    <h2>Standard tools, parsed for you.</h2>
-    <p class="lead">Porthole shells out to the tools you already trust and turns their output into a clean list. <code>lsof</code> finds listening sockets and each process's directory; tunnels come from the ngrok local API, the <code>cloudflared</code>/<code>lt</code> command lines, <code>~/.cloudflared/config.yml</code> and <code>tailscale serve status</code>. It's signed with a Developer ID and notarized by Apple.</p>
+    <div class="eyebrow" data-i18n="how_eyebrow">Under the hood</div>
+    <h2 data-i18n="how_h2">Standard tools, parsed for you.</h2>
+    <p class="lead" data-i18n="how_lead">Porthole shells out to the tools you already trust and turns their output into a clean list. <code>lsof</code> finds listening sockets and each process's directory; tunnels come from the ngrok local API, the <code>cloudflared</code>/<code>lt</code> command lines, <code>~/.cloudflared/config.yml</code> and <code>tailscale serve status</code>. It's signed with a Developer ID and notarized by Apple.</p>
     <div class="chips">
       <span class="chip"><span class="d" style="background:var(--sky)"></span>lsof</span>
       <span class="chip"><span class="d" style="background:var(--sky)"></span>ps</span>
@@ -167,25 +180,92 @@
 
 <section class="block install" id="install">
   <div class="wrap reveal">
-    <div class="eyebrow">Get it</div>
-    <h2>Install in seconds.</h2>
+    <div class="eyebrow" data-i18n="get_eyebrow">Get it</div>
+    <h2 data-i18n="get_h2">Install in seconds.</h2>
     <div class="box">
-      <div class="cmd"><span id="brew2">brew install --cask ntd4996/tap/porthole</span><button onclick="cp('brew2',this)">Copy</button></div>
-      <a class="btn btn-primary" href="https://github.com/ntd4996/Porthole/releases/latest">Or download the .dmg</a>
-      <span class="note">Signed with a Developer ID and notarized by Apple, no Gatekeeper workaround needed.</span>
+      <div class="cmd"><span id="brew2">brew install --cask ntd4996/tap/porthole</span><button onclick="cp('brew2',this)" data-i18n="copy">Copy</button></div>
+      <a class="btn btn-primary" href="https://github.com/ntd4996/Porthole/releases/latest" data-i18n="get_dmg">Or download the .dmg</a>
+      <span class="note" data-i18n="get_note">Signed with a Developer ID and notarized by Apple, no Gatekeeper workaround needed.</span>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <span>Free &amp; open source · <a class="grad" href="https://github.com/ntd4996/Porthole/blob/main/LICENSE">MIT</a></span>
+    <span data-i18n="foot_left">Free &amp; open source · <a class="grad" href="https://github.com/ntd4996/Porthole/blob/main/LICENSE">MIT</a></span>
     <span><a href="https://github.com/ntd4996/Porthole">github.com/ntd4996/Porthole</a></span>
   </div>
 </footer>
 
 <script>
-function cp(id,btn){navigator.clipboard.writeText(document.getElementById(id).textContent);var t=btn.textContent;btn.textContent='Copied';setTimeout(function(){btn.textContent=t},1200)}
+function cp(id,btn){navigator.clipboard.writeText(document.getElementById(id).textContent);var t=btn.textContent;btn.textContent=I18N[LANG].copied;setTimeout(function(){btn.textContent=t},1200)}
+
+/* Translations. en is the source of truth; vi/zh added alongside. */
+var I18N={
+  en:{
+    copy:"Copy", copied:"Copied",
+    nav_features:"Features", nav_how:"How it works", nav_install:"Install", nav_download:"Download",
+    badge:'<span class="dot"></span>macOS 14+ · Apple Silicon &amp; Intel · Free &amp; open source',
+    h1:'Your dev ports,<br/><span class="grad">at a glance.</span>',
+    sub:"A macOS menu bar app that shows which ports are running, which project owns each one, and which tunnels point where.",
+    hero_dl:"Download for macOS",
+    f_eyebrow:"Everything in one place",
+    f_h2:'Stop running <span class="grad">lsof -i</span> by hand.',
+    f_lead:"Porthole keeps a live, readable list of your local dev world in the menu bar, refreshed while it's open.",
+    feat1_h3:"Grouped by project",
+    feat1_p:"Every listening dev port with the process behind it, grouped under the project that owns it, resolved from the process working directory.",
+    feat2_h3:"Tunnels, mapped to ports",
+    feat2_p:"ngrok, Cloudflare Tunnel, Tailscale and localtunnel detected automatically, each public URL one click away.",
+    feat3_h3:"One-click actions",
+    feat3_p:'Open <code>localhost:PORT</code> in the browser, copy the URL, or kill the process, straight from the row.',
+    feat4_h3:"Ignore the noise",
+    feat4_p:"Hide system services like ControlCenter and rapportd by name or port. Seeded with sensible defaults, fully editable.",
+    feat5_h3:"Native &amp; light",
+    feat5_p:"A real menu bar popover with a smooth open animation. No Dock icon, no background hog.",
+    feat6_h3:"No magic, no privileges",
+    feat6_p:'Just reads <code>lsof</code> / <code>ps</code> and tunnel tools. No kernel extensions, no elevated access.',
+    how_eyebrow:"Under the hood",
+    how_h2:"Standard tools, parsed for you.",
+    how_lead:"Porthole shells out to the tools you already trust and turns their output into a clean list. <code>lsof</code> finds listening sockets and each process's directory; tunnels come from the ngrok local API, the <code>cloudflared</code>/<code>lt</code> command lines, <code>~/.cloudflared/config.yml</code> and <code>tailscale serve status</code>. It's signed with a Developer ID and notarized by Apple.",
+    get_eyebrow:"Get it",
+    get_h2:"Install in seconds.",
+    get_dmg:"Or download the .dmg",
+    get_note:"Signed with a Developer ID and notarized by Apple, no Gatekeeper workaround needed.",
+    foot_left:'Free &amp; open source · <a class="grad" href="https://github.com/ntd4996/Porthole/blob/main/LICENSE">MIT</a>'
+  }
+};
+
+var LANG="en";
+function pickLang(){
+  var saved=null; try{saved=localStorage.getItem("porthole-lang")}catch(e){}
+  var q=new URLSearchParams(location.search).get("lang");
+  var nav=(navigator.language||"en").toLowerCase();
+  var c=q||saved||nav;
+  if(c.indexOf("vi")===0) return "vi";
+  if(c.indexOf("zh")===0) return "zh";
+  return "en";
+}
+function applyLang(lang){
+  if(!I18N[lang]) lang="en";
+  LANG=lang;
+  var dict=I18N[lang], en=I18N.en;
+  document.documentElement.lang = (lang==="zh"?"zh-Hans":lang);
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    var k=el.getAttribute("data-i18n");
+    var v=(dict&&dict[k]!=null)?dict[k]:en[k];
+    if(v!=null) el.innerHTML=v;
+  });
+  document.querySelectorAll(".lang button").forEach(function(b){
+    b.classList.toggle("on", b.getAttribute("data-lang")===lang);
+  });
+  try{localStorage.setItem("porthole-lang",lang)}catch(e){}
+}
+document.getElementById("lang").addEventListener("click",function(e){
+  var b=e.target.closest("button"); if(!b) return;
+  applyLang(b.getAttribute("data-lang"));
+});
+applyLang(pickLang());
+
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
 </script>
