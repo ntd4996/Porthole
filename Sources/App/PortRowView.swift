@@ -30,14 +30,14 @@ struct PortRowView: View {
         .contextMenu {
             switch mode {
             case .normal:
-                Button("Ignore process \(port.command)") { ignore.ignoreProcess(port.command) }
-                Button("Ignore port \(port.port)") { ignore.ignorePort(port.port) }
+                Button(loc("Ignore process \(port.command)")) { ignore.ignoreProcess(port.command) }
+                Button(loc("Ignore port \(port.port)")) { ignore.ignorePort(port.port) }
             case .ignored:
-                Button("Un-ignore") { ignore.unignoreMatching(port) }
+                Button(loc("Un-ignore")) { ignore.unignoreMatching(port) }
             }
         }
-        .confirmationDialog("Kill PID \(port.pid)?", isPresented: $confirmingKill) {
-            Button("Kill", role: .destructive) {
+        .confirmationDialog(loc("Kill PID \(Int(port.pid))?"), isPresented: $confirmingKill) {
+            Button(loc("Kill"), role: .destructive) {
                 Actions.kill(pid: port.pid)
                 onRefresh()
             }
@@ -45,22 +45,22 @@ struct PortRowView: View {
     }
 
     @ViewBuilder private var actions: some View {
-        iconButton("arrow.up.right.square", "Open in browser") {
+        iconButton("arrow.up.right.square", loc("Open in browser")) {
             Actions.openInBrowser(port: port.port)
         }
-        iconButton("doc.on.doc", "Copy URL") {
+        iconButton("doc.on.doc", loc("Copy URL")) {
             Actions.copy("http://localhost:\(port.port)")
         }
         switch mode {
         case .normal:
-            iconButton("eye.slash", "Ignore \(port.command)") {
+            iconButton("eye.slash", loc("Ignore \(port.command)")) {
                 ignore.ignoreProcess(port.command)
             }
-            iconButton("xmark.circle", "Kill process", color: .red) {
+            iconButton("xmark.circle", loc("Kill process"), color: .red) {
                 confirmingKill = true
             }
         case .ignored:
-            iconButton("eye", "Un-ignore") {
+            iconButton("eye", loc("Un-ignore")) {
                 ignore.unignoreMatching(port)
             }
         }
