@@ -67,12 +67,12 @@ final class StatusBarController: NSObject, NSPopoverDelegate {
             item.target = self
             menu.addItem(item)
         }
-        add("Open Porthole", #selector(menuOpen))
-        add("Refresh", #selector(menuRefresh), key: "r")
+        add(loc("Open Porthole"), #selector(menuOpen))
+        add(loc("Refresh"), #selector(menuRefresh), key: "r")
         menu.addItem(.separator())
-        add("Check for Updates…", #selector(menuCheckUpdates))
+        add(loc("Check for Updates…"), #selector(menuCheckUpdates))
         menu.addItem(.separator())
-        add("Quit Porthole", #selector(menuQuit), key: "q")
+        add(loc("Quit Porthole"), #selector(menuQuit), key: "q")
         menu.popUp(positioning: nil,
                    at: NSPoint(x: 0, y: button.bounds.height + 5),
                    in: button)
