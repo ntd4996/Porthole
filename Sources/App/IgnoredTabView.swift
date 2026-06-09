@@ -33,7 +33,7 @@ struct IgnoredTabView: View {
             }
 
             if ignoredPorts.isEmpty && uncoveredProcesses.isEmpty && uncoveredPorts.isEmpty {
-                Text("Nothing ignored")
+                Text(loc("Nothing ignored"))
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.vertical, 24)
@@ -45,7 +45,7 @@ struct IgnoredTabView: View {
 
     private var rulesCard: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Rules (not running)")
+            Text(loc("Rules (not running)"))
                 .font(.subheadline.weight(.semibold))
                 .padding(.horizontal, 10).padding(.top, 8).padding(.bottom, 2)
 
@@ -68,17 +68,17 @@ struct IgnoredTabView: View {
                 .lineLimit(1)
             Spacer()
             Button(action: remove) { Image(systemName: "eye") }
-                .buttonStyle(IconButtonStyle()).help("Un-ignore")
+                .buttonStyle(IconButtonStyle()).help(loc("Un-ignore"))
         }
         .padding(.horizontal, 10).padding(.vertical, 5)
     }
 
     private var addPortField: some View {
         HStack {
-            TextField("Ignore a port…", text: $newPort)
+            TextField(loc("Ignore a port…"), text: $newPort)
                 .textFieldStyle(.roundedBorder)
                 .onSubmit(addPort)
-            Button("Add", action: addPort).disabled(Int(newPort) == nil)
+            Button(loc("Add"), action: addPort).disabled(Int(newPort) == nil)
         }
     }
 
