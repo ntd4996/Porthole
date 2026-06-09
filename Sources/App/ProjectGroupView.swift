@@ -12,7 +12,9 @@ struct ProjectGroupView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: 6) {
-                Text(title).font(.subheadline.weight(.semibold))
+                // "Other" is the catch-all sentinel from PortListView.group; project
+                // names stay verbatim, only the sentinel is localized.
+                Text(title == "Other" ? loc("Other") : title).font(.subheadline.weight(.semibold))
                 if let kind, kind != .unknown {
                     Text(kind.rawValue)
                         .font(.caption2)
