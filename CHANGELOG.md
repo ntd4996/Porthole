@@ -3,6 +3,13 @@
 All notable changes to Porthole are documented here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/).
 
+## [Unreleased]
+
+### Added
+- Localization in English, Vietnamese (vi), and Simplified Chinese (zh-Hans).
+  The app picks the language from the system, the landing page from the
+  browser locale (with an EN/VI/中 switcher), and the README ships in all three.
+
 ## [1.0.2] - 2026-06-06
 
 ### Fixed
