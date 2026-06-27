@@ -1,0 +1,27 @@
+# Porthole
+
+> A free, open-source (MIT) macOS menu bar app that shows which dev ports are running, which project owns each one, and which tunnels point where, right from your menu bar.
+
+Porthole runs as a macOS 14+ menu bar (accessory) app. It keeps a live list of local dev ports, maps each port to the project that owns it (resolved from the process working directory: git root, package.json, go.mod, pyproject.toml), and detects tunnels (ngrok, Cloudflare Tunnel, Tailscale, localtunnel) pointing at those ports. It supports per-port quick actions (open localhost:PORT, copy URL, kill process) and an editable ignore list for noisy system services. Distributed as a notarized universal DMG with Sparkle auto-update, and via Homebrew.
+
+## Pages
+
+- [Home / landing page](https://porthole.thenightwatcher.online/): Overview, features, screenshots, and download.
+
+## Source & releases
+
+- [GitHub repository](https://github.com/ntd4996/Porthole): Source code (Swift 6, SwiftPM), MIT licensed.
+- [Latest release](https://github.com/ntd4996/Porthole/releases/latest): Notarized universal DMG download.
+- [Changelog](https://github.com/ntd4996/Porthole/blob/main/CHANGELOG.md): Version history.
+- [Sparkle appcast](https://porthole.thenightwatcher.online/appcast.xml): Auto-update feed.
+
+## Install
+
+- Homebrew: `brew install --cask ntd4996/tap/porthole`
+- Direct download: notarized DMG from the latest GitHub release.
+
+## Documentation
+
+- [README (English)](https://github.com/ntd4996/Porthole/blob/main/README.md)
+- [README (Tiếng Việt)](https://github.com/ntd4996/Porthole/blob/main/README.vi.md)
+- [README (中文)](https://github.com/ntd4996/Porthole/blob/main/README.zh.md)
