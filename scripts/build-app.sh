@@ -68,7 +68,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
   <key>NSHighResolutionCapable</key><true/>
   <key>NSHumanReadableCopyright</key><string>Copyright © 2026 Dat Nguyen. MIT Licensed.</string>
   <key>SUEnableAutomaticChecks</key><true/>
-  <key>SUFeedURL</key><string>https://ntd4996.github.io/Porthole/appcast.xml</string>
+  <key>SUFeedURL</key><string>https://porthole.thenightwatcher.online/appcast.xml</string>
   <key>SUPublicEDKey</key><string>2wE8euYD3TUI39c6UhWHbYlhHpXkeM5NiJTJywrm0xQ=</string>
 </dict>
 </plist>
