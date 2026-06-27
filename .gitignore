@@ -7,4 +7,3 @@ DerivedData/
 
 # Local AI memory notes (not committed)
 .agent-memory/
-worker/node_modules/
