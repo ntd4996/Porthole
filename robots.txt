@@ -1,0 +1,35 @@
+# robots.txt for Porthole (https://porthole.thenightwatcher.online)
+# Porthole is an open-source (MIT) macOS menu bar app. Crawlers and AI agents are welcome.
+
+User-agent: *
+Allow: /
+Content-Signal: search=yes, ai-train=yes, ai-input=yes
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://porthole.thenightwatcher.online/sitemap.xml
