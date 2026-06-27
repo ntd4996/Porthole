@@ -1,0 +1,11 @@
+name = "porthole-site"
+main = "src/index.js"
+compatibility_date = "2026-06-01"
+account_id = "4dfa59a6cf1ecb9cb737c205fb06e3ce"
+
+# Bind to the custom domain via a Workers Route (requires the DNS record
+# for porthole.thenightwatcher.online to be Proxied / orange cloud).
+# Enable by uncommenting once the record is proxied:
+routes = [
+  { pattern = "porthole.thenightwatcher.online/*", zone_name = "thenightwatcher.online" }
+]
