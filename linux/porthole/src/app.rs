@@ -48,6 +48,11 @@ pub struct Controller {
     tx: async_channel::Sender<Msg>,
     refresh_timer: RefCell<Option<glib::SourceId>>,
     hold: RefCell<Option<gtk::gio::ApplicationHoldGuard>>,
+    /// Popover-style auto-hide bookkeeping. `seen_active` gates the first focus,
+    /// `suppress_autohide` keeps the window open while one of our own modal
+    /// dialogs (kill confirm / update) holds focus.
+    seen_active: std::cell::Cell<bool>,
+    suppress_autohide: std::cell::Cell<bool>,
 }
 
 impl Controller {
@@ -115,8 +120,10 @@ impl Controller {
         dialog.add_response("kill", i18n::tr("Kill"));
         dialog.set_response_appearance("kill", adw::ResponseAppearance::Destructive);
         dialog.set_default_response(Some("cancel"));
+        self.suppress_autohide.set(true);
         let this = self.clone();
         dialog.connect_response(None, move |_, resp| {
+            this.suppress_autohide.set(false);
             if resp == "kill" {
                 crate::actions::kill(pid);
                 this.refresh();
@@ -190,6 +197,9 @@ impl Controller {
             Some(&body),
         );
         dialog.add_response("ok", "OK");
+        self.suppress_autohide.set(true);
+        let this = self.clone();
+        dialog.connect_response(None, move |_, _| this.suppress_autohide.set(false));
         dialog.present();
     }
 }
@@ -226,6 +236,8 @@ fn build(app: &adw::Application) {
         tx: tx.clone(),
         refresh_timer: RefCell::new(None),
         hold: RefCell::new(Some(app.hold())), // keep running with no visible window
+        seen_active: std::cell::Cell::new(false),
+        suppress_autohide: std::cell::Cell::new(false),
     });
 
     // Auto-refresh only while the popover is on screen.
@@ -267,12 +279,14 @@ fn build(app: &adw::Application) {
     // Close the popover when it loses focus (click outside / switch app), like a
     // macOS transient popover. Only after it has actually been focused once, so a
     // window that never grabs focus (some Wayland setups) does not vanish instantly.
+    // Skip auto-hide while one of our own modal dialogs holds focus, otherwise the
+    // window hides out from under the dialog and leaks its modal grab (freezing UI).
     {
-        let seen_active = std::cell::Cell::new(false);
+        let c = controller.clone();
         controller.views.window.connect_is_active_notify(move |win| {
             if win.is_active() {
-                seen_active.set(true);
-            } else if seen_active.replace(false) {
+                c.seen_active.set(true);
+            } else if c.seen_active.replace(false) && !c.suppress_autohide.get() {
                 win.set_visible(false);
             }
         });
