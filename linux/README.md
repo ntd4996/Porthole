@@ -52,6 +52,24 @@ flatpak-builder --user --install --force-clean build-dir \
     linux/packaging/flatpak/org.datnt.Porthole.yml
 ```
 
+## Install via APT
+
+One line adds the signed repo and installs Porthole:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ntd4996/Porthole/main/linux/setup-apt.sh | sudo bash
+```
+
+Or do it by hand:
+
+```bash
+curl -fsSL https://porthole.thenightwatcher.online/apt/key.asc | sudo gpg --dearmor -o /usr/share/keyrings/porthole.gpg
+echo "deb [signed-by=/usr/share/keyrings/porthole.gpg] https://porthole.thenightwatcher.online/apt stable main" | sudo tee /etc/apt/sources.list.d/porthole.list
+sudo apt update && sudo apt install porthole
+```
+
+The repo is regenerated and signed by the [`APT repo` workflow](../.github/workflows/apt.yml) on every `linux-v*` release, so `sudo apt upgrade` picks up new versions.
+
 ## Notes
 
 - `ss` shows the PID/name only for processes owned by the current user (same as

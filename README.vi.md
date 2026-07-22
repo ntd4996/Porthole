@@ -61,13 +61,13 @@ chmod +x Porthole-x86_64.AppImage
 sudo apt install ./porthole_*.deb
 ```
 
-Hoặc thêm **APT repository** một lần, sau đó cập nhật bằng `apt upgrade`:
+Hoặc cài từ **APT repository** bằng một lệnh (sau đó `apt upgrade` tự cập nhật):
 
 ```bash
-curl -fsSL https://porthole.thenightwatcher.online/apt/key.asc | sudo gpg --dearmor -o /usr/share/keyrings/porthole.gpg
-echo "deb [signed-by=/usr/share/keyrings/porthole.gpg] https://porthole.thenightwatcher.online/apt stable main" | sudo tee /etc/apt/sources.list.d/porthole.list
-sudo apt update && sudo apt install porthole
+curl -fsSL https://raw.githubusercontent.com/ntd4996/Porthole/main/linux/setup-apt.sh | sudo bash
 ```
+
+Lệnh này thêm repo đã ký và cài `porthole`. (Muốn thêm repo thủ công? Xem [`linux/README.md`](linux/README.md).)
 
 Porthole hiện dưới dạng icon khay hệ thống. Trên GNOME cần cài [extension AppIndicator/StatusNotifierItem](https://extensions.gnome.org/extension/615/appindicator-support/) để thấy icon (KDE và đa số desktop khác hỗ trợ sẵn). Xem [`linux/README.md`](linux/README.md) để build từ nguồn hoặc Flatpak.
 
