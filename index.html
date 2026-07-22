@@ -118,6 +118,14 @@
   .dlbtn:hover{filter:brightness(1.07);transform:translateY(-1px)}
   .dlbtn.ghost{background:transparent;border:1px solid var(--line);color:var(--cream)}
   .dlbtn.ghost:hover{border-color:var(--teal);color:var(--teal)}
+  .osTabs{display:inline-flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px;margin:30px 0 2px}
+  .osTab{display:inline-flex;align-items:center;gap:8px;background:transparent;border:none;color:var(--muted);cursor:pointer;font:inherit;font-weight:600;font-size:14.5px;padding:9px 22px;border-radius:999px;transition:.15s}
+  .osTab svg{width:15px;height:15px}
+  .osTab:hover{color:var(--cream)}
+  .osTab.on{background:linear-gradient(100deg,var(--sky),var(--teal));color:#06243a}
+  .ospanel{margin-top:6px}
+  .ospanel[hidden]{display:none}
+  .dlcards-2{max-width:760px;margin-left:auto;margin-right:auto}
 
   footer{border-top:1px solid var(--line);padding:30px 0 60px}
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;color:var(--muted);font-size:14px;align-items:center}
@@ -207,34 +215,40 @@
     <h2 data-i18n="get_h2">Install in seconds.</h2>
     <p class="lead" style="margin:0 auto" data-i18n="get_lead">A signed macOS app or a native Linux build. Pick your platform below.</p>
 
-    <div class="cta" style="margin-top:26px">
-      <a class="btn btn-primary" href="https://github.com/ntd4996/Porthole/releases/latest" data-i18n="get_mac_btn">Download for macOS</a>
-      <a class="btn btn-ghost" href="https://github.com/ntd4996/Porthole" data-i18n="get_gh_btn">Star on GitHub</a>
+    <div class="osTabs" role="tablist">
+      <button class="osTab" data-os="mac" onclick="showOS('mac')"><svg viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>macOS</button>
+      <button class="osTab" data-os="linux" onclick="showOS('linux')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>Linux</button>
     </div>
 
-    <div class="platforms">
-      <span class="pf"><svg viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>macOS <b data-i18n="avail">Available</b></span>
-      <span class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>Linux <b data-i18n="avail">Available</b></span>
+    <div class="ospanel" data-os="mac">
+      <div class="dlcards dlcards-2">
+        <div class="dlcard">
+          <div class="top"><div class="di"><svg viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg></div><h3>Homebrew <span class="tag" data-i18n="dl_reco">Recommended</span></h3></div>
+          <p data-i18n="dl_brew_p">One command, and it stays current with <code>brew upgrade</code>.</p>
+          <div class="cmd"><span id="c_brew">brew install --cask ntd4996/tap/porthole</span><button onclick="cp('c_brew',this)" data-i18n="copy">Copy</button></div>
+        </div>
+        <div class="dlcard">
+          <div class="top"><div class="di" style="background:rgba(56,189,248,.12);color:var(--sky)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></div><h3>Direct .dmg <span class="tag" data-i18n="dl_mac_tag">14+</span></h3></div>
+          <p data-i18n="dl_dmg_p">Signed &amp; notarized by Apple. Apple Silicon &amp; Intel, no Gatekeeper prompt.</p>
+          <a class="dlbtn" href="https://github.com/ntd4996/Porthole/releases/latest" data-i18n="dl_dmg">Download .dmg</a>
+        </div>
+      </div>
     </div>
 
-    <div class="dlcards">
-      <div class="dlcard">
-        <div class="top"><div class="di"><svg viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg></div><h3>macOS <span class="tag" data-i18n="dl_mac_tag">14+</span></h3></div>
-        <p data-i18n="dl_mac_p">Homebrew cask, or a signed &amp; notarized .dmg. Apple Silicon &amp; Intel.</p>
-        <div class="cmd"><span id="c_brew">brew install --cask ntd4996/tap/porthole</span><button onclick="cp('c_brew',this)" data-i18n="copy">Copy</button></div>
-        <a class="dlbtn ghost" href="https://github.com/ntd4996/Porthole/releases/latest" data-i18n="dl_dmg">Download .dmg</a>
-      </div>
-      <div class="dlcard">
-        <div class="top"><div class="di" style="background:rgba(86,205,132,.12);color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></div><h3>AppImage <span class="tag" data-i18n="dl_any">Any distro</span></h3></div>
-        <p data-i18n="dl_ai_p">One-line install, or <code>chmod +x</code> and run. Works on every distro.</p>
-        <div class="cmd"><span id="c_ai">curl -fsSL https://raw.githubusercontent.com/ntd4996/Porthole/main/linux/install.sh | bash</span><button onclick="cp('c_ai',this)" data-i18n="copy">Copy</button></div>
-        <a class="dlbtn" href="https://github.com/ntd4996/Porthole/releases" data-i18n="dl_ai">Download AppImage</a>
-      </div>
-      <div class="dlcard">
-        <div class="top"><div class="di" style="background:rgba(240,163,90,.12);color:var(--orange)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 8-9 4-9-4 9-4 9 4Z"/><path d="M3 8v8l9 4 9-4V8"/><path d="m3 8 9 4 9-4"/></svg></div><h3>Debian / Ubuntu <span class="tag">.deb</span></h3></div>
-        <p data-i18n="dl_deb_p">APT repo that updates with <code>apt upgrade</code>, or a single .deb.</p>
-        <div class="cmd"><span id="c_apt">curl -fsSL https://raw.githubusercontent.com/ntd4996/Porthole/main/linux/setup-apt.sh | sudo bash</span><button onclick="cp('c_apt',this)" data-i18n="copy">Copy</button></div>
-        <a class="dlbtn" href="https://github.com/ntd4996/Porthole/releases" data-i18n="dl_deb">Download .deb</a>
+    <div class="ospanel" data-os="linux" hidden>
+      <div class="dlcards dlcards-2">
+        <div class="dlcard">
+          <div class="top"><div class="di" style="background:rgba(86,205,132,.12);color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></div><h3>AppImage <span class="tag" data-i18n="dl_any">Any distro</span></h3></div>
+          <p data-i18n="dl_ai_p">One-line install, or <code>chmod +x</code> and run. Works on every distro.</p>
+          <div class="cmd"><span id="c_ai">curl -fsSL https://raw.githubusercontent.com/ntd4996/Porthole/main/linux/install.sh | bash</span><button onclick="cp('c_ai',this)" data-i18n="copy">Copy</button></div>
+          <a class="dlbtn" href="https://github.com/ntd4996/Porthole/releases" data-i18n="dl_ai">Download AppImage</a>
+        </div>
+        <div class="dlcard">
+          <div class="top"><div class="di" style="background:rgba(240,163,90,.12);color:var(--orange)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 8-9 4-9-4 9-4 9 4Z"/><path d="M3 8v8l9 4 9-4V8"/><path d="m3 8 9 4 9-4"/></svg></div><h3>Debian / Ubuntu <span class="tag">.deb</span></h3></div>
+          <p data-i18n="dl_deb_p">APT repo that updates with <code>apt upgrade</code>, or a single .deb.</p>
+          <div class="cmd"><span id="c_apt">curl -fsSL https://raw.githubusercontent.com/ntd4996/Porthole/main/linux/setup-apt.sh | sudo bash</span><button onclick="cp('c_apt',this)" data-i18n="copy">Copy</button></div>
+          <a class="dlbtn" href="https://github.com/ntd4996/Porthole/releases" data-i18n="dl_deb">Download .deb</a>
+        </div>
       </div>
     </div>
 
@@ -284,6 +298,7 @@ var I18N={
     get_lead:"A signed macOS app or a native Linux build. Pick your platform below.",
     get_mac_btn:"Download for macOS", get_gh_btn:"Star on GitHub", avail:"Available",
     dl_mac_tag:"14+", dl_mac_p:"Homebrew cask, or a signed &amp; notarized .dmg. Apple Silicon &amp; Intel.", dl_dmg:"Download .dmg",
+    dl_reco:"Recommended", dl_brew_p:"One command, and it stays current with <code>brew upgrade</code>.", dl_dmg_p:"Signed &amp; notarized by Apple. Apple Silicon &amp; Intel, no Gatekeeper prompt.",
     dl_any:"Any distro", dl_ai_p:"One-line install, or <code>chmod +x</code> and run. Works on every distro.", dl_ai:"Download AppImage",
     dl_deb_p:"APT repo that updates with <code>apt upgrade</code>, or a single .deb.", dl_deb:"Download .deb",
     get_tray_note:"Porthole lives in the system tray. On GNOME, enable the AppIndicator extension to see the tray icon.",
@@ -323,6 +338,7 @@ var I18N={
     get_lead:"Bản macOS đã ký hoặc bản Linux gốc. Chọn nền tảng của bạn bên dưới.",
     get_mac_btn:"Tải cho macOS", get_gh_btn:"Star trên GitHub", avail:"Sẵn sàng",
     dl_mac_tag:"14+", dl_mac_p:"Homebrew cask, hoặc file .dmg đã ký &amp; notarize. Apple Silicon &amp; Intel.", dl_dmg:"Tải .dmg",
+    dl_reco:"Khuyên dùng", dl_brew_p:"Một lệnh, tự cập nhật qua <code>brew upgrade</code>.", dl_dmg_p:"Đã ký &amp; notarize bởi Apple. Apple Silicon &amp; Intel, không bị Gatekeeper hỏi.",
     dl_any:"Mọi distro", dl_ai_p:"Cài một dòng, hoặc <code>chmod +x</code> rồi chạy. Chạy trên mọi distro.", dl_ai:"Tải AppImage",
     dl_deb_p:"APT repo tự cập nhật qua <code>apt upgrade</code>, hoặc một file .deb.", dl_deb:"Tải .deb",
     get_tray_note:"Porthole nằm ở khay hệ thống. Trên GNOME, bật extension AppIndicator để thấy icon khay.",
@@ -362,6 +378,7 @@ var I18N={
     get_lead:"已签名的 macOS 应用，或原生 Linux 构建。在下面选择你的平台。",
     get_mac_btn:"下载 macOS 版", get_gh_btn:"在 GitHub 加星", avail:"可用",
     dl_mac_tag:"14+", dl_mac_p:"Homebrew cask，或经签名并公证的 .dmg。Apple Silicon &amp; Intel。", dl_dmg:"下载 .dmg",
+    dl_reco:"推荐", dl_brew_p:"一条命令，并通过 <code>brew upgrade</code> 保持最新。", dl_dmg_p:"经 Apple 签名并公证。Apple Silicon &amp; Intel，无 Gatekeeper 提示。",
     dl_any:"任意发行版", dl_ai_p:"一行命令安装，或 <code>chmod +x</code> 后运行。适用于所有发行版。", dl_ai:"下载 AppImage",
     dl_deb_p:"APT 软件源，用 <code>apt upgrade</code> 自动更新，或单个 .deb。", dl_deb:"下载 .deb",
     get_tray_note:"Porthole 位于系统托盘。在 GNOME 上，启用 AppIndicator 扩展以显示托盘图标。",
@@ -403,6 +420,12 @@ document.getElementById("lang").addEventListener("click",function(e){
   applyLang(b.getAttribute("data-lang"));
 });
 applyLang(pickLang());
+
+function showOS(os){
+  document.querySelectorAll(".osTab").forEach(function(t){t.classList.toggle("on", t.getAttribute("data-os")===os)});
+  document.querySelectorAll(".ospanel").forEach(function(p){p.hidden = p.getAttribute("data-os")!==os});
+}
+showOS(/Mac|iPhone|iPad/i.test(navigator.platform||navigator.userAgent) ? "mac" : "linux");
 
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
