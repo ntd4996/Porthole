@@ -96,6 +96,29 @@
   .install .cmd button:hover{color:var(--teal)}
   .note{color:var(--faint);font-size:13.5px}
 
+  /* download cards */
+  .platforms{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:30px 0 4px}
+  .pf{display:inline-flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:14px;color:var(--cream);font-weight:600}
+  .pf svg{width:15px;height:15px;opacity:.92}
+  .pf b{color:var(--teal);font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(45,212,191,.12);padding:2px 8px;border-radius:999px}
+  .dlcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:34px;text-align:left}
+  .dlcard{display:flex;flex-direction:column;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;transition:.2s}
+  .dlcard:hover{border-color:rgba(45,212,191,.35);transform:translateY(-3px)}
+  .dlcard .top{display:flex;align-items:center;gap:12px}
+  .dlcard .di{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:rgba(56,189,248,.12);color:var(--sky);flex:none}
+  .dlcard .di svg{width:20px;height:20px}
+  .dlcard h3{font-family:var(--disp);font-size:16.5px;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .dlcard .tag{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--teal);background:rgba(45,212,191,.12);border-radius:999px;padding:2px 8px}
+  .dlcard p{color:var(--muted);font-size:13.5px;line-height:1.55;flex:1;margin:0}
+  .dlcard .cmd{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;background:#06121f;border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+  .dlcard .cmd span{line-height:1.5;color:var(--cream);word-break:break-all}
+  .dlcard .cmd button{background:rgba(255,255,255,.06);border:none;color:var(--muted);cursor:pointer;font:inherit;font-size:11px;padding:5px 9px;border-radius:7px;flex:none}
+  .dlcard .cmd button:hover{color:var(--teal)}
+  .dlbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(100deg,var(--sky),var(--teal));color:#06243a;border-radius:11px;padding:11px 14px;font-weight:600;font-size:14px;transition:.15s}
+  .dlbtn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+  .dlbtn.ghost{background:transparent;border:1px solid var(--line);color:var(--cream)}
+  .dlbtn.ghost:hover{border-color:var(--teal);color:var(--teal)}
+
   footer{border-top:1px solid var(--line);padding:30px 0 60px}
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;color:var(--muted);font-size:14px;align-items:center}
   footer a:hover{color:var(--cream)}
@@ -182,15 +205,40 @@
   <div class="wrap reveal">
     <div class="eyebrow" data-i18n="get_eyebrow">Get it</div>
     <h2 data-i18n="get_h2">Install in seconds.</h2>
-    <div class="box">
-      <div class="cmd"><span id="brew2">brew install --cask ntd4996/tap/porthole</span><button onclick="cp('brew2',this)" data-i18n="copy">Copy</button></div>
-      <a class="btn btn-primary" href="https://github.com/ntd4996/Porthole/releases/latest" data-i18n="get_dmg">Or download the .dmg</a>
-      <span class="note" data-i18n="get_note">Signed with a Developer ID and notarized by Apple, no Gatekeeper workaround needed.</span>
-      <div style="height:1px;background:var(--line);width:100%;margin:4px 0"></div>
-      <div class="eyebrow" data-i18n="get_linux_eyebrow">On Linux</div>
-      <div class="cmd"><span id="lxinstall">curl -fsSL https://raw.githubusercontent.com/ntd4996/Porthole/main/linux/install.sh | bash</span><button onclick="cp('lxinstall',this)" data-i18n="copy">Copy</button></div>
-      <span class="note" data-i18n="get_linux_note">Native Rust + GTK4 build. Installs the latest AppImage, or grab the AppImage / .deb from <a class="grad" href="https://github.com/ntd4996/Porthole/releases">Releases</a>. GNOME needs the AppIndicator extension for the tray icon.</span>
+    <p class="lead" style="margin:0 auto" data-i18n="get_lead">A signed macOS app or a native Linux build. Pick your platform below.</p>
+
+    <div class="cta" style="margin-top:26px">
+      <a class="btn btn-primary" href="https://github.com/ntd4996/Porthole/releases/latest" data-i18n="get_mac_btn">Download for macOS</a>
+      <a class="btn btn-ghost" href="https://github.com/ntd4996/Porthole" data-i18n="get_gh_btn">Star on GitHub</a>
     </div>
+
+    <div class="platforms">
+      <span class="pf"><svg viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>macOS <b data-i18n="avail">Available</b></span>
+      <span class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>Linux <b data-i18n="avail">Available</b></span>
+    </div>
+
+    <div class="dlcards">
+      <div class="dlcard">
+        <div class="top"><div class="di"><svg viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg></div><h3>macOS <span class="tag" data-i18n="dl_mac_tag">14+</span></h3></div>
+        <p data-i18n="dl_mac_p">Homebrew cask, or a signed &amp; notarized .dmg. Apple Silicon &amp; Intel.</p>
+        <div class="cmd"><span id="c_brew">brew install --cask ntd4996/tap/porthole</span><button onclick="cp('c_brew',this)" data-i18n="copy">Copy</button></div>
+        <a class="dlbtn ghost" href="https://github.com/ntd4996/Porthole/releases/latest" data-i18n="dl_dmg">Download .dmg</a>
+      </div>
+      <div class="dlcard">
+        <div class="top"><div class="di" style="background:rgba(86,205,132,.12);color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></div><h3>AppImage <span class="tag" data-i18n="dl_any">Any distro</span></h3></div>
+        <p data-i18n="dl_ai_p">One-line install, or <code>chmod +x</code> and run. Works on every distro.</p>
+        <div class="cmd"><span id="c_ai">curl -fsSL https://raw.githubusercontent.com/ntd4996/Porthole/main/linux/install.sh | bash</span><button onclick="cp('c_ai',this)" data-i18n="copy">Copy</button></div>
+        <a class="dlbtn" href="https://github.com/ntd4996/Porthole/releases" data-i18n="dl_ai">Download AppImage</a>
+      </div>
+      <div class="dlcard">
+        <div class="top"><div class="di" style="background:rgba(240,163,90,.12);color:var(--orange)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 8-9 4-9-4 9-4 9 4Z"/><path d="M3 8v8l9 4 9-4V8"/><path d="m3 8 9 4 9-4"/></svg></div><h3>Debian / Ubuntu <span class="tag">.deb</span></h3></div>
+        <p data-i18n="dl_deb_p">APT repo that updates with <code>apt upgrade</code>, or a single .deb.</p>
+        <div class="cmd"><span id="c_apt">curl -fsSL https://raw.githubusercontent.com/ntd4996/Porthole/main/linux/setup-apt.sh | sudo bash</span><button onclick="cp('c_apt',this)" data-i18n="copy">Copy</button></div>
+        <a class="dlbtn" href="https://github.com/ntd4996/Porthole/releases" data-i18n="dl_deb">Download .deb</a>
+      </div>
+    </div>
+
+    <p class="note" style="margin-top:26px" data-i18n="get_tray_note">Porthole lives in the system tray. On GNOME, enable the AppIndicator extension to see the tray icon.</p>
   </div>
 </section>
 
@@ -233,6 +281,12 @@ var I18N={
     how_lead:"Porthole shells out to the tools you already trust and turns their output into a clean list. <code>lsof</code> finds listening sockets and each process's directory; tunnels come from the ngrok local API, the <code>cloudflared</code>/<code>lt</code> command lines, <code>~/.cloudflared/config.yml</code> and <code>tailscale serve status</code>. It's signed with a Developer ID and notarized by Apple.",
     get_eyebrow:"Get it",
     get_h2:"Install in seconds.",
+    get_lead:"A signed macOS app or a native Linux build. Pick your platform below.",
+    get_mac_btn:"Download for macOS", get_gh_btn:"Star on GitHub", avail:"Available",
+    dl_mac_tag:"14+", dl_mac_p:"Homebrew cask, or a signed &amp; notarized .dmg. Apple Silicon &amp; Intel.", dl_dmg:"Download .dmg",
+    dl_any:"Any distro", dl_ai_p:"One-line install, or <code>chmod +x</code> and run. Works on every distro.", dl_ai:"Download AppImage",
+    dl_deb_p:"APT repo that updates with <code>apt upgrade</code>, or a single .deb.", dl_deb:"Download .deb",
+    get_tray_note:"Porthole lives in the system tray. On GNOME, enable the AppIndicator extension to see the tray icon.",
     get_dmg:"Or download the .dmg",
     get_note:"Signed with a Developer ID and notarized by Apple, no Gatekeeper workaround needed.",
     get_linux_eyebrow:"On Linux",
@@ -266,6 +320,12 @@ var I18N={
     how_lead:"Porthole gọi các công cụ bạn vốn tin dùng và biến output của chúng thành danh sách gọn gàng. <code>lsof</code> tìm socket đang lắng nghe và thư mục của từng tiến trình; tunnel đến từ ngrok local API, dòng lệnh <code>cloudflared</code>/<code>lt</code>, <code>~/.cloudflared/config.yml</code> và <code>tailscale serve status</code>. Ứng dụng được ký bằng Developer ID và notarize bởi Apple.",
     get_eyebrow:"Tải ngay",
     get_h2:"Cài đặt trong vài giây.",
+    get_lead:"Bản macOS đã ký hoặc bản Linux gốc. Chọn nền tảng của bạn bên dưới.",
+    get_mac_btn:"Tải cho macOS", get_gh_btn:"Star trên GitHub", avail:"Sẵn sàng",
+    dl_mac_tag:"14+", dl_mac_p:"Homebrew cask, hoặc file .dmg đã ký &amp; notarize. Apple Silicon &amp; Intel.", dl_dmg:"Tải .dmg",
+    dl_any:"Mọi distro", dl_ai_p:"Cài một dòng, hoặc <code>chmod +x</code> rồi chạy. Chạy trên mọi distro.", dl_ai:"Tải AppImage",
+    dl_deb_p:"APT repo tự cập nhật qua <code>apt upgrade</code>, hoặc một file .deb.", dl_deb:"Tải .deb",
+    get_tray_note:"Porthole nằm ở khay hệ thống. Trên GNOME, bật extension AppIndicator để thấy icon khay.",
     get_dmg:"Hoặc tải file .dmg",
     get_note:"Được ký bằng Developer ID và notarize bởi Apple, không cần lách Gatekeeper.",
     get_linux_eyebrow:"Trên Linux",
@@ -299,6 +359,12 @@ var I18N={
     how_lead:"Porthole 调用你早已信任的工具，并把它们的输出整理成清晰的列表。<code>lsof</code> 查找监听中的套接字和每个进程的目录；隧道信息来自 ngrok 本地 API、<code>cloudflared</code>/<code>lt</code> 命令行、<code>~/.cloudflared/config.yml</code> 以及 <code>tailscale serve status</code>。应用经 Developer ID 签名并通过 Apple 公证。",
     get_eyebrow:"获取",
     get_h2:"几秒完成安装。",
+    get_lead:"已签名的 macOS 应用，或原生 Linux 构建。在下面选择你的平台。",
+    get_mac_btn:"下载 macOS 版", get_gh_btn:"在 GitHub 加星", avail:"可用",
+    dl_mac_tag:"14+", dl_mac_p:"Homebrew cask，或经签名并公证的 .dmg。Apple Silicon &amp; Intel。", dl_dmg:"下载 .dmg",
+    dl_any:"任意发行版", dl_ai_p:"一行命令安装，或 <code>chmod +x</code> 后运行。适用于所有发行版。", dl_ai:"下载 AppImage",
+    dl_deb_p:"APT 软件源，用 <code>apt upgrade</code> 自动更新，或单个 .deb。", dl_deb:"下载 .deb",
+    get_tray_note:"Porthole 位于系统托盘。在 GNOME 上，启用 AppIndicator 扩展以显示托盘图标。",
     get_dmg:"或下载 .dmg",
     get_note:"经 Developer ID 签名并通过 Apple 公证，无需绕过 Gatekeeper。",
     get_linux_eyebrow:"在 Linux 上",
