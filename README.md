@@ -9,6 +9,7 @@
 [![CI](https://github.com/ntd4996/Porthole/actions/workflows/ci.yml/badge.svg)](https://github.com/ntd4996/Porthole/actions/workflows/ci.yml)
 [![Download](https://img.shields.io/github/v/release/ntd4996/Porthole?label=download&color=0E7490)](https://github.com/ntd4996/Porthole/releases/latest)
 [![Platform](https://img.shields.io/badge/macOS-14%2B-blue)](https://github.com/ntd4996/Porthole/releases/latest)
+[![Linux](https://img.shields.io/badge/Linux-GTK4-orange)](https://github.com/ntd4996/Porthole/releases)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 **English** · [Tiếng Việt](README.vi.md) · [中文](README.zh.md)
@@ -40,6 +41,21 @@ brew install --cask ntd4996/tap/porthole
 Grab the latest signed & notarized `.dmg` from the [releases page](https://github.com/ntd4996/Porthole/releases/latest), open it, and drag Porthole to Applications.
 
 Porthole lives in the menu bar (no Dock icon). Click the porthole icon to open the panel.
+
+### Linux
+
+A native Linux port (Rust + GTK4/libadwaita) lives in [`linux/`](linux/). Grab a build from the [releases page](https://github.com/ntd4996/Porthole/releases) (tags `linux-v*`):
+
+```bash
+# AppImage (any distro): make it executable and run
+chmod +x Porthole-x86_64.AppImage
+./Porthole-x86_64.AppImage
+
+# Debian / Ubuntu / Mint
+sudo apt install ./porthole_*.deb
+```
+
+Porthole shows up as a system-tray icon. On GNOME you need the [AppIndicator/StatusNotifierItem extension](https://extensions.gnome.org/extension/615/appindicator-support/) for the tray icon to appear (KDE and most other desktops support it out of the box). See [`linux/README.md`](linux/README.md) to build from source or a Flatpak.
 
 ## How it works
 

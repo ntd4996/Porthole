@@ -41,6 +41,21 @@ Lấy file `.dmg` mới nhất đã ký và notarize từ [trang releases](https
 
 Porthole nằm trên thanh menu (không có icon Dock). Nhấp vào biểu tượng porthole để mở bảng điều khiển.
 
+### Linux
+
+Bản Linux gốc (Rust + GTK4/libadwaita) nằm trong [`linux/`](linux/). Tải bản build ở [trang releases](https://github.com/ntd4996/Porthole/releases) (tag `linux-v*`):
+
+```bash
+# AppImage (mọi distro)
+chmod +x Porthole-x86_64.AppImage
+./Porthole-x86_64.AppImage
+
+# Debian / Ubuntu / Mint
+sudo apt install ./porthole_*.deb
+```
+
+Porthole hiện dưới dạng icon khay hệ thống. Trên GNOME cần cài [extension AppIndicator/StatusNotifierItem](https://extensions.gnome.org/extension/615/appindicator-support/) để thấy icon (KDE và đa số desktop khác hỗ trợ sẵn). Xem [`linux/README.md`](linux/README.md) để build từ nguồn hoặc Flatpak.
+
 ## Cách hoạt động
 
 Porthole gọi các công cụ chuẩn và phân tích output của chúng, không cần kernel extension, không cần quyền nâng cao:

@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#38BDF8"/>
+      <stop offset="0.55" stop-color="#0E7490"/>
+      <stop offset="1" stop-color="#0C2A4A"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="220" y1="220" x2="804" y2="804" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F3F4F6"/>
+      <stop offset="0.45" stop-color="#B9C0CA"/>
+      <stop offset="0.7" stop-color="#7B838F"/>
+      <stop offset="1" stop-color="#525a66"/>
+    </linearGradient>
+    <radialGradient id="glass" cx="0.42" cy="0.38" r="0.75">
+      <stop offset="0" stop-color="#D9F2FF"/>
+      <stop offset="0.45" stop-color="#5EC2E8"/>
+      <stop offset="0.8" stop-color="#0E7CB0"/>
+      <stop offset="1" stop-color="#0A4E78"/>
+    </radialGradient>
+    <linearGradient id="gloss" x1="300" y1="270" x2="560" y2="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="glassClip"><circle cx="512" cy="512" r="262"/></clipPath>
+  </defs>
+
+  <!-- macOS icon grid: 824 body centered in 1024 with transparent margin -->
+  <g transform="translate(100,100) scale(0.8046875)">
+  <!-- background squircle -->
+  <rect x="0" y="0" width="1024" height="1024" rx="228" ry="228" fill="url(#bg)"/>
+
+  <!-- soft outer shadow under the porthole -->
+  <circle cx="512" cy="536" r="344" fill="#000000" opacity="0.18"/>
+
+  <!-- metallic ring -->
+  <circle cx="512" cy="512" r="344" fill="url(#ring)"/>
+  <circle cx="512" cy="512" r="344" fill="none" stroke="#3c424c" stroke-width="6" opacity="0.6"/>
+  <circle cx="512" cy="512" r="276" fill="none" stroke="#3c424c" stroke-width="8" opacity="0.5"/>
+
+  <!-- glass -->
+  <circle cx="512" cy="512" r="262" fill="url(#glass)"/>
+
+  <!-- gloss highlight on glass -->
+  <g clip-path="url(#glassClip)">
+    <ellipse cx="420" cy="380" rx="240" ry="170" fill="url(#gloss)" transform="rotate(-28 420 380)"/>
+  </g>
+
+  <!-- rivets / bolts around the ring -->
+  <g fill="#EAECEF">
+    <circle cx="512" cy="202" r="17"/>
+    <circle cx="731" cy="293" r="17"/>
+    <circle cx="822" cy="512" r="17"/>
+    <circle cx="731" cy="731" r="17"/>
+    <circle cx="512" cy="822" r="17"/>
+    <circle cx="293" cy="731" r="17"/>
+    <circle cx="202" cy="512" r="17"/>
+    <circle cx="293" cy="293" r="17"/>
+  </g>
+  <g fill="#000000" opacity="0.22">
+    <circle cx="512" cy="206" r="17"/>
+    <circle cx="734" cy="296" r="17"/>
+    <circle cx="826" cy="515" r="17"/>
+    <circle cx="734" cy="734" r="17"/>
+    <circle cx="515" cy="826" r="17"/>
+    <circle cx="296" cy="734" r="17"/>
+    <circle cx="206" cy="515" r="17"/>
+    <circle cx="296" cy="296" r="17"/>
+  </g>
+  <g fill="#F3F4F6">
+    <circle cx="512" cy="202" r="14"/>
+    <circle cx="731" cy="293" r="14"/>
+    <circle cx="822" cy="512" r="14"/>
+    <circle cx="731" cy="731" r="14"/>
+    <circle cx="512" cy="822" r="14"/>
+    <circle cx="293" cy="731" r="14"/>
+    <circle cx="202" cy="512" r="14"/>
+    <circle cx="293" cy="293" r="14"/>
+  </g>
+  </g>
+</svg>

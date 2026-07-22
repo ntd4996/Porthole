@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Porthole
+GenericName=Dev Port Monitor
+Comment=See which dev ports are running, which project owns each, and which tunnels point where
+Exec=porthole
+Icon=org.datnt.Porthole
+Categories=Utility;Development;Network;
+Keywords=port;dev;tunnel;ngrok;cloudflared;tailscale;localhost;
+Terminal=false
+StartupNotify=false
