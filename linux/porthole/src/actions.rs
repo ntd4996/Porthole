@@ -18,8 +18,14 @@ pub fn copy(text: &str) {
     }
 }
 
-/// SIGTERM the process. Returns false if the call fails.
+/// SIGTERM the process. Returns false if the call fails or the pid is unusable.
 pub fn kill(pid: i32) -> bool {
+    // Guard: `kill(0, …)` signals the WHOLE process group of the caller (i.e.
+    // Porthole itself), and negative pids target a group too. We only ever want
+    // to signal a single real process, so refuse anything <= 0.
+    if pid <= 0 {
+        return false;
+    }
     // Safe: kill(2) with SIGTERM has no memory effects.
     unsafe { libc::kill(pid, libc::SIGTERM) == 0 }
 }

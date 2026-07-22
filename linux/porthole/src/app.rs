@@ -103,6 +103,9 @@ impl Controller {
 
     /// Confirm, then SIGTERM the process and rescan.
     pub fn confirm_kill(self: &Rc<Self>, pid: i32) {
+        if pid <= 0 {
+            return; // never signal pid 0 / a process group (would hit ourselves)
+        }
         let dialog = adw::MessageDialog::new(
             Some(&self.views.window),
             Some(&i18n::kill_pid(pid)),

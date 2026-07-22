@@ -63,14 +63,20 @@ pub fn build(controller: &Rc<Controller>, port: &PortInfo, mode: PortRowMode) ->
             }
             top.append(&hide);
 
-            let kill = icon_button("window-close-symbolic", i18n::tr("Kill process"));
-            kill.add_css_class("error");
-            {
-                let c = controller.clone();
-                let pid = port.pid;
-                kill.connect_clicked(move |_| c.confirm_kill(pid));
+            // Only offer Kill when we resolved a real owning PID. `ss` reports
+            // pid 0 when the socket's process can't be seen (another user,
+            // inside a container, or missing privilege); killing pid 0 would
+            // signal Porthole's own process group.
+            if port.pid > 0 {
+                let kill = icon_button("window-close-symbolic", i18n::tr("Kill process"));
+                kill.add_css_class("error");
+                {
+                    let c = controller.clone();
+                    let pid = port.pid;
+                    kill.connect_clicked(move |_| c.confirm_kill(pid));
+                }
+                top.append(&kill);
             }
-            top.append(&kill);
         }
         PortRowMode::Ignored => {
             let show = icon_button("view-reveal-symbolic", i18n::tr("Un-ignore"));
