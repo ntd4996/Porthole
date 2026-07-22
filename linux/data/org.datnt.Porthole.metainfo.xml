@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.datnt.Porthole</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>Porthole</name>
+  <summary>See which dev ports are running and which tunnels point where</summary>
+  <description>
+    <p>
+      Porthole lists the dev ports that are LISTENing on your machine, maps each
+      one to the project that owns it (resolved from the process working
+      directory), and surfaces tunnels pointing at those ports from ngrok,
+      Cloudflare Tunnel, Tailscale, and localtunnel, all from a system-tray menu.
+    </p>
+    <p>Features:</p>
+    <ul>
+      <li>Running dev ports with the process behind each one</li>
+      <li>Which project owns each port, grouped per project</li>
+      <li>Public tunnel URLs one click away</li>
+      <li>Open in browser, copy the URL, or kill the process</li>
+      <li>Ignore list to hide noisy system services</li>
+    </ul>
+  </description>
+  <launchable type="desktop-id">org.datnt.Porthole.desktop</launchable>
+  <url type="homepage">https://porthole.thenightwatcher.online</url>
+  <url type="bugtracker">https://github.com/ntd4996/Porthole/issues</url>
+  <developer id="online.thenightwatcher">
+    <name>Dat Nguyen</name>
+  </developer>
+  <content_rating type="oars-1.1" />
+  <categories>
+    <category>Utility</category>
+    <category>Development</category>
+  </categories>
+  <releases>
+    <release version="0.1.0" date="2026-07-22">
+      <description>
+        <p>First Linux release: full parity with the macOS app.</p>
+      </description>
+    </release>
+  </releases>
+</component>

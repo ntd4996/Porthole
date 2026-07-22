@@ -1,0 +1,67 @@
+name: Linux
+
+on:
+  push:
+    branches: [main]
+    tags: ["linux-v*"]
+    paths:
+      - "linux/**"
+      - ".github/workflows/linux.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "linux/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install GTK4 / libadwaita
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-4-dev libadwaita-1-dev libdbus-1-dev pkg-config build-essential iproute2
+
+      - name: Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: linux
+
+      - name: Test
+        run: cargo test --manifest-path linux/Cargo.toml
+
+      - name: Build release
+        run: cargo build --release --manifest-path linux/Cargo.toml -p porthole
+
+      - name: Build .deb
+        run: |
+          cargo install cargo-deb --locked || true
+          cargo deb --no-build --manifest-path linux/porthole/Cargo.toml
+          ls -la linux/target/debian
+
+      - name: Build AppImage
+        run: |
+          sudo apt-get install -y libfuse2 file
+          linux/packaging/appimage/build-appimage.sh
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: porthole-linux
+          path: |
+            linux/target/Porthole-x86_64.AppImage
+            linux/target/debian/*.deb
+
+      - name: Attach to release
+        if: startsWith(github.ref, 'refs/tags/linux-v')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload "${GITHUB_REF_NAME}" \
+            linux/target/Porthole-x86_64.AppImage \
+            linux/target/debian/*.deb \
+            --clobber

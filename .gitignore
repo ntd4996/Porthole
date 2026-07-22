@@ -5,5 +5,8 @@ build/
 DerivedData/
 .swiftpm/
 
+# Rust (Linux port)
+linux/target/
+
 # Local AI memory notes (not committed)
 .agent-memory/

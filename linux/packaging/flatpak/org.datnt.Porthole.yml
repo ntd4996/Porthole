@@ -1,0 +1,53 @@
+# Flatpak manifest for Porthole.
+#
+# Porthole needs to see ports and processes owned by OTHER apps on the host,
+# which a normal Flatpak sandbox hides (separate PID namespace). We therefore
+# request host filesystem + the Flatpak host-command portal, and the app runs
+# its scan tools (`ss`, `tailscale`, reads of /proc) through `flatpak-spawn
+# --host` (see src/host.rs). This is why it is NOT a good Flathub candidate as-is.
+#
+# Local build:
+#   flatpak install flathub org.gnome.Platform//47 org.gnome.Sdk//47 \
+#       org.freedesktop.Sdk.Extension.rust-stable//24.08
+#   flatpak-builder --user --install --force-clean build-dir \
+#       linux/packaging/flatpak/org.datnt.Porthole.yml
+app-id: org.datnt.Porthole
+runtime: org.gnome.Platform
+runtime-version: "47"
+sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: porthole
+
+finish-args:
+  - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  # See ports/processes and read config on the host, and run host commands.
+  - --filesystem=host:ro
+  - --talk-name=org.freedesktop.Flatpak
+  # Show the tray icon (StatusNotifierItem).
+  - --talk-name=org.kde.StatusNotifierWatcher
+
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin
+  env:
+    CARGO_HOME: /run/build/porthole/cargo
+  # Cargo fetches crates during the build; Flathub requires vendored sources
+  # (cargo-sources.json) instead of network access.
+  build-args:
+    - --share=network
+
+modules:
+  - name: porthole
+    buildsystem: simple
+    build-commands:
+      - cargo build --release --manifest-path linux/Cargo.toml -p porthole
+      - install -Dm755 linux/target/release/porthole /app/bin/porthole
+      - install -Dm644 linux/data/org.datnt.Porthole.desktop /app/share/applications/org.datnt.Porthole.desktop
+      - install -Dm644 linux/data/org.datnt.Porthole.metainfo.xml /app/share/metainfo/org.datnt.Porthole.metainfo.xml
+      - install -Dm644 linux/data/icons/hicolor/scalable/apps/org.datnt.Porthole.svg /app/share/icons/hicolor/scalable/apps/org.datnt.Porthole.svg
+    sources:
+      - type: dir
+        path: ../../..

@@ -1,0 +1,39 @@
+[package]
+name = "porthole"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+description = "See which dev ports are running, which project owns each, and which tunnels point where, from your system tray."
+
+[[bin]]
+name = "porthole"
+path = "src/main.rs"
+
+[dependencies]
+porthole-core = { path = "../porthole-core" }
+gtk = { package = "gtk4", version = "0.9", features = ["v4_10"] }
+adw = { package = "libadwaita", version = "0.7", features = ["v1_4"] }
+ksni = "0.2"
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+libc = "0.2"
+dirs = "5"
+async-channel = "2"
+
+[package.metadata.deb]
+maintainer = "Dat Nguyen"
+copyright = "2026, Dat Nguyen"
+license-file = ["../../LICENSE", "0"]
+extended-description = "Porthole lists dev ports that are LISTENing, maps each to the project that owns it, and surfaces ngrok / Cloudflare / Tailscale / localtunnel tunnels pointing at them, from a system-tray menu."
+section = "utils"
+priority = "optional"
+depends = "libgtk-4-1, libadwaita-1-0, libdbus-1-3, iproute2, xdg-utils"
+assets = [
+    ["target/release/porthole", "usr/bin/", "755"],
+    ["../data/org.datnt.Porthole.desktop", "usr/share/applications/", "644"],
+    ["../data/org.datnt.Porthole.metainfo.xml", "usr/share/metainfo/", "644"],
+    ["../data/icons/hicolor/scalable/apps/org.datnt.Porthole.svg", "usr/share/icons/hicolor/scalable/apps/", "644"],
+]

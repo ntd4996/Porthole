@@ -41,6 +41,21 @@ brew install --cask ntd4996/tap/porthole
 
 Porthole 驻留在菜单栏（没有 Dock 图标）。点击 porthole 图标即可打开面板。
 
+### Linux
+
+原生 Linux 版本（Rust + GTK4/libadwaita）位于 [`linux/`](linux/)。从 [发布页面](https://github.com/ntd4996/Porthole/releases) 获取构建（标签 `linux-v*`）：
+
+```bash
+# AppImage（任意发行版）
+chmod +x Porthole-x86_64.AppImage
+./Porthole-x86_64.AppImage
+
+# Debian / Ubuntu / Mint
+sudo apt install ./porthole_*.deb
+```
+
+Porthole 以系统托盘图标显示。在 GNOME 上需要安装 [AppIndicator/StatusNotifierItem 扩展](https://extensions.gnome.org/extension/615/appindicator-support/) 才能看到图标（KDE 及大多数桌面原生支持）。从源码构建或 Flatpak 请见 [`linux/README.md`](linux/README.md)。
+
 ## 工作原理
 
 Porthole 调用标准工具并解析它们的输出，无需内核扩展，无需提权：
