@@ -57,8 +57,16 @@ curl -fsSL https://raw.githubusercontent.com/ntd4996/Porthole/main/linux/install
 chmod +x Porthole-x86_64.AppImage
 ./Porthole-x86_64.AppImage
 
-# Debian / Ubuntu / Mint
+# Debian / Ubuntu / Mint（单个 .deb）
 sudo apt install ./porthole_*.deb
+```
+
+或添加 **APT 软件源** 一次，之后用 `apt upgrade` 更新：
+
+```bash
+curl -fsSL https://porthole.thenightwatcher.online/apt/key.asc | sudo gpg --dearmor -o /usr/share/keyrings/porthole.gpg
+echo "deb [signed-by=/usr/share/keyrings/porthole.gpg] https://porthole.thenightwatcher.online/apt stable main" | sudo tee /etc/apt/sources.list.d/porthole.list
+sudo apt update && sudo apt install porthole
 ```
 
 Porthole 以系统托盘图标显示。在 GNOME 上需要安装 [AppIndicator/StatusNotifierItem 扩展](https://extensions.gnome.org/extension/615/appindicator-support/) 才能看到图标（KDE 及大多数桌面原生支持）。从源码构建或 Flatpak 请见 [`linux/README.md`](linux/README.md)。

@@ -58,8 +58,16 @@ Or grab a build manually from the [releases page](https://github.com/ntd4996/Por
 chmod +x Porthole-x86_64.AppImage
 ./Porthole-x86_64.AppImage
 
-# Debian / Ubuntu / Mint
+# Debian / Ubuntu / Mint (single .deb)
 sudo apt install ./porthole_*.deb
+```
+
+Or add the **APT repository** once, then it updates with `apt upgrade`:
+
+```bash
+curl -fsSL https://porthole.thenightwatcher.online/apt/key.asc | sudo gpg --dearmor -o /usr/share/keyrings/porthole.gpg
+echo "deb [signed-by=/usr/share/keyrings/porthole.gpg] https://porthole.thenightwatcher.online/apt stable main" | sudo tee /etc/apt/sources.list.d/porthole.list
+sudo apt update && sudo apt install porthole
 ```
 
 Porthole shows up as a system-tray icon. On GNOME you need the [AppIndicator/StatusNotifierItem extension](https://extensions.gnome.org/extension/615/appindicator-support/) for the tray icon to appear (KDE and most other desktops support it out of the box). See [`linux/README.md`](linux/README.md) to build from source or a Flatpak.

@@ -1,0 +1,62 @@
+name: APT repo
+
+# Builds a signed APT repository from the newest linux-v* .deb and publishes it
+# to gh-pages under /apt (served at https://porthole.thenightwatcher.online/apt).
+on:
+  push:
+    tags: ["linux-v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install tools
+        run: sudo apt-get update && sudo apt-get install -y dpkg-dev apt-utils gnupg
+
+      - name: Fetch newest linux-v* .deb
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          TAG=$(gh api "repos/${GITHUB_REPOSITORY}/releases" \
+            --jq '[.[] | select(.tag_name | startswith("linux-v"))][0].tag_name')
+          echo "Using release $TAG"
+          mkdir -p staging
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern '*.deb' --dir staging
+
+      - name: Assemble repository
+        run: |
+          set -e
+          mkdir -p apt/pool/main apt/dists/stable/main/binary-amd64
+          mv staging/*.deb apt/pool/main/
+          cp linux/packaging/apt/porthole-apt-public.asc apt/key.asc
+          cd apt
+          apt-ftparchive packages pool/main > dists/stable/main/binary-amd64/Packages
+          gzip -kf dists/stable/main/binary-amd64/Packages
+          apt-ftparchive -c=../linux/packaging/apt/apt-ftparchive.conf \
+            release dists/stable > dists/stable/Release
+
+      - name: Sign repository
+        env:
+          APT_GPG_PRIVATE_KEY: ${{ secrets.APT_GPG_PRIVATE_KEY }}
+          FPR: CDFE83224F6EED76F5B791328B8F046C72A67D88
+        run: |
+          set -e
+          echo "$APT_GPG_PRIVATE_KEY" | gpg --batch --import
+          cd apt/dists/stable
+          gpg --batch --yes --default-key "$FPR" -abs -o Release.gpg Release
+          gpg --batch --yes --default-key "$FPR" --clearsign -o InRelease Release
+
+      - name: Publish to gh-pages /apt
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./apt
+          destination_dir: apt
+          keep_files: true
