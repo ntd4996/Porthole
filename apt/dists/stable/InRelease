@@ -1,0 +1,43 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Architectures: amd64
+Codename: stable
+Components: main
+Date: Wed, 22 Jul 2026 05:39:19 +0000
+Description: Porthole APT repository (Linux, GTK4)
+Label: Porthole
+Origin: Porthole
+Suite: stable
+MD5Sum:
+ 1c4605d0332292a2982d82ae55e83d11              191 Release
+ 4c816489348427b7085c7675db6e8aee              931 main/binary-amd64/Packages
+ aeb4b19301e7dfa2fcf46ae3f625df0f              631 main/binary-amd64/Packages.gz
+SHA1:
+ dd8108aa12fc874f01de4c0c28b571d6e9bc768f              191 Release
+ 3d7da1a0fb392887903e82b3a29d3acbe275a16c              931 main/binary-amd64/Packages
+ 9a81855eaf3b472be30ed2e9116d803f63aeab08              631 main/binary-amd64/Packages.gz
+SHA256:
+ 05a4dddf2312a35c5536482fed19889324510f67d80a14925d167a7e934c1929              191 Release
+ 4e88319c9ef25fcaddb1924ba5d331493ecf00732d20fb1cc67f256c2b470375              931 main/binary-amd64/Packages
+ f2c9347251f12a27ebe1a66bfce6e8d23d40bbaa2b00ad55a87f58227480d677              631 main/binary-amd64/Packages.gz
+SHA512:
+ ff7336a18b46852cf92bef3a1980d8be6c6601d6bb5ff5ff43b3c560c06b9895efb89bde742a9a2b1f4d710fe55b975b2d047515df9357c49d940162895a02a3              191 Release
+ e74168b4a8e73a4d2877ae1b381cc289058f04c128732a546cb8de58c42f42b80f9a127cbf99369e5a8cfb6dd582dd975b9afea71b6fbc3d9a8631871a791841              931 main/binary-amd64/Packages
+ a95f8afd7234bd7f7a0b87ba431d3a73133b57045fdb0a40bc0364df39d1eaa0e9bfd0801f7f5a5124f2943654535af2e49a1272117a2dc4f057f0dbc74b92a1              631 main/binary-amd64/Packages.gz
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEzf6DIk9u7Xb1t5Eyi48EbHKmfYgFAmpgV4gACgkQi48EbHKm
+fYh3AA/+N/+vBg3ZCHmnd6I4ghGGYoznvEU+5hdzPTpWH/hJiyz3sSjuYaPc8AzD
+svAeg+mIOQqNkGCIyImdLbWw/D6jJmUSx9LVnSR6K8DnnVX0X2t5DDLdnVUz9Kmx
++O2oly9fafgLaBbNsKItoeCVyJtuJ6A4lRqrbFzpIdfOmFhX7ITR/GX1JkK56V6d
+j2SYscsq+hmNoeqpicf6LQP8QDQ/V0cAQy9v08NJCTOYBqU8Qn5IVmy3fbnlZehz
+jEhHqulmZeyBcmNV5GsKRpQ8GvpmveKoBB+fNAnSfUoV01MGYzQidnlV5JyY9BCn
+BP66aUWJzjHSjAxT30pO/mbB8aLq7rw9zVXmuR1kvaeX9PLu3uTYOBgHNL+9epSw
+OoDrE6ffa3mvQUeFYftlZZZ3tpah7qgZg9LPqcu54RsP857WnYfzAbJeWBa55UOV
+hkS5BxLX1I1JuFoWaw2wlI5CJ/408XNQtYapJGbuqW/3kIXbUlqSlF8Pgod7C2PW
+/SRq7Iiema4THjPe+p48XzOw3MUyP1v47MiKYs8L763DwP90Rh5S24nUIcz+V/Sx
+8OKECMXEUAobd9u5QCkY10uvDEaE/J4LRhPatfDKrNvoGmEB66K+BWoWaGWoxS6u
+MOqTGj/mHQOLPDuzEBtEMUbx8LZpyv5WbFye7SFsid1eqxtFTH8=
+=Te9x
+-----END PGP SIGNATURE-----

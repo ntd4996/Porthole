@@ -1,0 +1,21 @@
+Package: porthole
+Architecture: amd64
+Version: 0.1.1-1
+Priority: optional
+Section: utils
+Maintainer: Dat Nguyen
+Installed-Size: 5010
+Depends: iproute2, libadwaita-1-0, libdbus-1-3, libgtk-4-1, xdg-utils
+Filename: pool/main/porthole_0.1.1-1_amd64.deb
+Size: 1675072
+MD5sum: 48c9ec6b7e50e55fdd6c59b2a3724b32
+SHA1: 10ffacd03f8adcac9f5fecca58b6e648f118edfd
+SHA256: 6eda0fc15573c83b19540c0e86e7821d34c46ffcbd16a906eb65d85b10a73842
+SHA512: ed605feb7bd4aac3c102b37275602df088f23ff2ba46cf0e8c8e8d69861b9cc4580fa145b24ac3c8625c73670f90f49f152297408171057b877ae3a51d2ec633
+Homepage: https://github.com/ntd4996/Porthole
+Description: See which dev ports are running, which project owns each, and which tunnels
+ point where, from your system tray.
+ Porthole lists dev ports that are LISTENing, maps each to the project that owns
+ it, and surfaces ngrok / Cloudflare / Tailscale / localtunnel tunnels pointing
+ at them, from a system-tray menu.
+
