@@ -22,6 +22,7 @@ serde_json = "1"
 libc = "0.2"
 dirs = "5"
 async-channel = "2"
+png = "0.17"
 
 [package.metadata.deb]
 maintainer = "Dat Nguyen"

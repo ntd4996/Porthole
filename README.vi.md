@@ -43,7 +43,14 @@ Porthole nằm trên thanh menu (không có icon Dock). Nhấp vào biểu tư�
 
 ### Linux
 
-Bản Linux gốc (Rust + GTK4/libadwaita) nằm trong [`linux/`](linux/). Tải bản build ở [trang releases](https://github.com/ntd4996/Porthole/releases) (tag `linux-v*`):
+Bản Linux gốc (Rust + GTK4/libadwaita) nằm trong [`linux/`](linux/).
+
+```bash
+# Một dòng: cài AppImage mới nhất vào ~/.local/bin + menu ứng dụng
+curl -fsSL https://raw.githubusercontent.com/ntd4996/Porthole/main/linux/install.sh | bash
+```
+
+Hoặc tải thủ công ở [trang releases](https://github.com/ntd4996/Porthole/releases) (tag `linux-v*`):
 
 ```bash
 # AppImage (mọi distro)
