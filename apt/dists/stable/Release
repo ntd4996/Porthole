@@ -1,24 +1,24 @@
 Architectures: amd64
 Codename: stable
 Components: main
-Date: Wed, 22 Jul 2026 05:39:19 +0000
+Date: Wed, 22 Jul 2026 06:48:50 +0000
 Description: Porthole APT repository (Linux, GTK4)
 Label: Porthole
 Origin: Porthole
 Suite: stable
 MD5Sum:
- 1c4605d0332292a2982d82ae55e83d11              191 Release
- 4c816489348427b7085c7675db6e8aee              931 main/binary-amd64/Packages
- aeb4b19301e7dfa2fcf46ae3f625df0f              631 main/binary-amd64/Packages.gz
+ 5f326dd208dedb63fa21c318a1ef840c              191 Release
+ 82c163a97bfc16f24e1d167aee0e4ef0              931 main/binary-amd64/Packages
+ 0645d4e2b000c31209729b9656c886a2              629 main/binary-amd64/Packages.gz
 SHA1:
- dd8108aa12fc874f01de4c0c28b571d6e9bc768f              191 Release
- 3d7da1a0fb392887903e82b3a29d3acbe275a16c              931 main/binary-amd64/Packages
- 9a81855eaf3b472be30ed2e9116d803f63aeab08              631 main/binary-amd64/Packages.gz
+ ec4911a15653ec3f8026a6828ad221812c3a6d87              191 Release
+ abb8ea77598ffd75c140140e5e0a9339e712d49e              931 main/binary-amd64/Packages
+ f76d456d8d28bb62a648ac161cc1c267cb062497              629 main/binary-amd64/Packages.gz
 SHA256:
- 05a4dddf2312a35c5536482fed19889324510f67d80a14925d167a7e934c1929              191 Release
- 4e88319c9ef25fcaddb1924ba5d331493ecf00732d20fb1cc67f256c2b470375              931 main/binary-amd64/Packages
- f2c9347251f12a27ebe1a66bfce6e8d23d40bbaa2b00ad55a87f58227480d677              631 main/binary-amd64/Packages.gz
+ 5607f49b5ef52661f99765ab6d4f9acf699d2ed16ffe4f9dff4c15c981dd4bd3              191 Release
+ 1f694903a6b7c44414eb21d0dd1dfb4273459d5cbcc9d0a74a84a1546d3b89ba              931 main/binary-amd64/Packages
+ 3574272a4481abf8369dddb444deaeaf95e92670e3b458f5821cf1bd1f736a01              629 main/binary-amd64/Packages.gz
 SHA512:
- ff7336a18b46852cf92bef3a1980d8be6c6601d6bb5ff5ff43b3c560c06b9895efb89bde742a9a2b1f4d710fe55b975b2d047515df9357c49d940162895a02a3              191 Release
- e74168b4a8e73a4d2877ae1b381cc289058f04c128732a546cb8de58c42f42b80f9a127cbf99369e5a8cfb6dd582dd975b9afea71b6fbc3d9a8631871a791841              931 main/binary-amd64/Packages
- a95f8afd7234bd7f7a0b87ba431d3a73133b57045fdb0a40bc0364df39d1eaa0e9bfd0801f7f5a5124f2943654535af2e49a1272117a2dc4f057f0dbc74b92a1              631 main/binary-amd64/Packages.gz
+ b53c5f363d3b551b3b727069864a8615cbf59c090fb22d2766c6b7950e2db86f431c4e6f527a04314f23693daf8bf24bbd33dc60233b9afcfcfd66fefa9948c6              191 Release
+ 26a216f624111b94cf97de8e96722d3eabb9dc89afe4ea91591f42d4886c5727cbd2638968bfbcd43230f571b8f1598a5c7341bbd52dfbf8e10b7a42c3c9e9ed              931 main/binary-amd64/Packages
+ b78250bd1d2c1ee45bade05b3487f684fd1104aaecda187df3e2151e25b0b74fc0af94b47b0ab4c996d9ac5e9cff699c4d7af5e0c49412c3280da29eff8b3275              629 main/binary-amd64/Packages.gz
