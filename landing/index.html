@@ -123,9 +123,12 @@
   .osTab svg{width:15px;height:15px}
   .osTab:hover{color:var(--cream)}
   .osTab.on{background:linear-gradient(100deg,var(--sky),var(--teal));color:#06243a}
+  .osTab .soon{font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:rgba(148,171,194,.2);color:var(--muted);border-radius:999px;padding:2px 7px}
+  .osTab.on .soon{background:rgba(6,36,58,.25);color:#06243a}
   .ospanel{margin-top:6px}
   .ospanel[hidden]{display:none}
   .dlcards-2{max-width:760px;margin-left:auto;margin-right:auto}
+  .dlcards-1{max-width:420px;margin-left:auto;margin-right:auto}
 
   footer{border-top:1px solid var(--line);padding:30px 0 60px}
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;color:var(--muted);font-size:14px;align-items:center}
@@ -218,6 +221,7 @@
     <div class="osTabs" role="tablist">
       <button class="osTab" data-os="mac" onclick="showOS('mac')"><svg viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>macOS</button>
       <button class="osTab" data-os="linux" onclick="showOS('linux')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>Linux</button>
+      <button class="osTab" data-os="win" onclick="showOS('win')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.7 10.4 4.6v6.9H3zM11.4 4.4 21 3v8.5h-9.6zM3 12.5h7.4v6.9L3 18.3zM11.4 12.5H21V21l-9.6-1.3z"/></svg>Windows <span class="soon" data-i18n="soon">Soon</span></button>
     </div>
 
     <div class="ospanel" data-os="mac">
@@ -248,6 +252,17 @@
           <p data-i18n="dl_deb_p">APT repo that updates with <code>apt upgrade</code>, or a single .deb.</p>
           <div class="cmd"><span id="c_apt">curl -fsSL https://raw.githubusercontent.com/ntd4996/Porthole/main/linux/setup-apt.sh | sudo bash</span><button onclick="cp('c_apt',this)" data-i18n="copy">Copy</button></div>
           <a class="dlbtn" href="https://github.com/ntd4996/Porthole/releases" data-i18n="dl_deb">Download .deb</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ospanel" data-os="win" hidden>
+      <div class="dlcards dlcards-1">
+        <div class="dlcard" style="text-align:center;align-items:center">
+          <div class="di" style="margin:0 auto;background:rgba(56,189,248,.12);color:var(--sky)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.7 10.4 4.6v6.9H3zM11.4 4.4 21 3v8.5h-9.6zM3 12.5h7.4v6.9L3 18.3zM11.4 12.5H21V21l-9.6-1.3z"/></svg></div>
+          <h3 style="justify-content:center" data-i18n="win_h">Windows is on the way</h3>
+          <p style="text-align:center" data-i18n="win_p">A native Windows build isn't ready yet. Star the repo to hear when it lands.</p>
+          <a class="dlbtn" href="https://github.com/ntd4996/Porthole" data-i18n="win_btn">Star on GitHub</a>
         </div>
       </div>
     </div>
@@ -302,6 +317,7 @@ var I18N={
     dl_any:"Any distro", dl_ai_p:"One-line install, or <code>chmod +x</code> and run. Works on every distro.", dl_ai:"Download AppImage",
     dl_deb_p:"APT repo that updates with <code>apt upgrade</code>, or a single .deb.", dl_deb:"Download .deb",
     get_tray_note:"Porthole lives in the system tray. On GNOME, enable the AppIndicator extension to see the tray icon.",
+    soon:"Soon", win_h:"Windows is on the way", win_p:"A native Windows build isn't ready yet. Star the repo to hear when it lands.", win_btn:"Star on GitHub",
     get_dmg:"Or download the .dmg",
     get_note:"Signed with a Developer ID and notarized by Apple, no Gatekeeper workaround needed.",
     get_linux_eyebrow:"On Linux",
@@ -342,6 +358,7 @@ var I18N={
     dl_any:"Mọi distro", dl_ai_p:"Cài một dòng, hoặc <code>chmod +x</code> rồi chạy. Chạy trên mọi distro.", dl_ai:"Tải AppImage",
     dl_deb_p:"APT repo tự cập nhật qua <code>apt upgrade</code>, hoặc một file .deb.", dl_deb:"Tải .deb",
     get_tray_note:"Porthole nằm ở khay hệ thống. Trên GNOME, bật extension AppIndicator để thấy icon khay.",
+    soon:"Sắp có", win_h:"Bản Windows đang tới", win_p:"Bản Windows gốc chưa sẵn sàng. Star repo để được báo khi có.", win_btn:"Star trên GitHub",
     get_dmg:"Hoặc tải file .dmg",
     get_note:"Được ký bằng Developer ID và notarize bởi Apple, không cần lách Gatekeeper.",
     get_linux_eyebrow:"Trên Linux",
@@ -382,6 +399,7 @@ var I18N={
     dl_any:"任意发行版", dl_ai_p:"一行命令安装，或 <code>chmod +x</code> 后运行。适用于所有发行版。", dl_ai:"下载 AppImage",
     dl_deb_p:"APT 软件源，用 <code>apt upgrade</code> 自动更新，或单个 .deb。", dl_deb:"下载 .deb",
     get_tray_note:"Porthole 位于系统托盘。在 GNOME 上，启用 AppIndicator 扩展以显示托盘图标。",
+    soon:"即将推出", win_h:"Windows 版即将到来", win_p:"原生 Windows 版本尚未就绪。为仓库加星，第一时间获知发布。", win_btn:"在 GitHub 加星",
     get_dmg:"或下载 .dmg",
     get_note:"经 Developer ID 签名并通过 Apple 公证，无需绕过 Gatekeeper。",
     get_linux_eyebrow:"在 Linux 上",
