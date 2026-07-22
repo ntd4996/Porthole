@@ -33,7 +33,7 @@ fetch() { # url dest
     [ -x "$TOOLS/$2" ] || { curl -fL "$1" -o "$TOOLS/$2"; chmod +x "$TOOLS/$2"; }
 }
 fetch "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage" linuxdeploy
-fetch "https://github.com/linuxdeploy/linuxdeploy-plugin-gtk/releases/download/continuous/linuxdeploy-plugin-gtk.sh" linuxdeploy-plugin-gtk
+fetch "https://raw.githubusercontent.com/linuxdeploy/linuxdeploy-plugin-gtk/master/linuxdeploy-plugin-gtk.sh" linuxdeploy-plugin-gtk
 
 echo "==> Packing AppImage"
 export OUTPUT="$LINUX/target/Porthole-x86_64.AppImage"
