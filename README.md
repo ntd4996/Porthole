@@ -44,7 +44,14 @@ Porthole lives in the menu bar (no Dock icon). Click the porthole icon to open t
 
 ### Linux
 
-A native Linux port (Rust + GTK4/libadwaita) lives in [`linux/`](linux/). Grab a build from the [releases page](https://github.com/ntd4996/Porthole/releases) (tags `linux-v*`):
+A native Linux port (Rust + GTK4/libadwaita) lives in [`linux/`](linux/).
+
+```bash
+# One-liner: install the latest AppImage into ~/.local/bin + app menu
+curl -fsSL https://raw.githubusercontent.com/ntd4996/Porthole/main/linux/install.sh | bash
+```
+
+Or grab a build manually from the [releases page](https://github.com/ntd4996/Porthole/releases) (tags `linux-v*`):
 
 ```bash
 # AppImage (any distro): make it executable and run

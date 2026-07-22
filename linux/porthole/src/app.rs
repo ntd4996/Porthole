@@ -22,7 +22,7 @@ pub enum Msg {
     Refresh,
     CheckUpdates,
     Quit,
-    UpdateResult(updater::Outcome),
+    UpdateResult(updater::Outcome, bool), // (outcome, silent)
 }
 
 #[derive(Default)]
@@ -149,18 +149,24 @@ impl Controller {
         }
     }
 
-    pub fn check_updates(self: &Rc<Self>) {
+    /// `silent` = background check on launch: stay quiet unless an update is found.
+    pub fn check_updates(self: &Rc<Self>, silent: bool) {
         let tx = self.tx.clone();
         std::thread::spawn(move || {
             let outcome = updater::check();
-            let _ = tx.send_blocking(Msg::UpdateResult(outcome));
+            let _ = tx.send_blocking(Msg::UpdateResult(outcome, silent));
         });
     }
 
-    fn handle_update_result(self: &Rc<Self>, outcome: updater::Outcome) {
+    fn handle_update_result(self: &Rc<Self>, outcome: updater::Outcome, silent: bool) {
         use updater::Outcome::*;
         let body = match outcome {
-            UpToDate => i18n::tr("Up to date").to_string(),
+            UpToDate => {
+                if silent {
+                    return;
+                }
+                i18n::tr("Up to date").to_string()
+            }
             Available { version, applied: true } => {
                 format!("Porthole {version} downloaded. Restart to apply.")
             }
@@ -168,8 +174,10 @@ impl Controller {
                 format!("{} (v{version})", i18n::tr("Update available"))
             }
             Error(_) => {
-                // Silent fallback: just open the releases page.
-                crate::actions::open_url(updater::RELEASES_PAGE);
+                // Manual check: fall back to opening the releases page. Silent: ignore.
+                if !silent {
+                    crate::actions::open_url(updater::RELEASES_PAGE);
+                }
                 return;
             }
         };
@@ -242,8 +250,8 @@ fn build(app: &adw::Application) {
                     Msg::Scanned(ports) => c.apply_scan(ports),
                     Msg::ToggleWindow => c.toggle_window(),
                     Msg::Refresh => c.refresh(),
-                    Msg::CheckUpdates => c.check_updates(),
-                    Msg::UpdateResult(o) => c.handle_update_result(o),
+                    Msg::CheckUpdates => c.check_updates(false),
+                    Msg::UpdateResult(o, silent) => c.handle_update_result(o, silent),
                     Msg::Quit => {
                         c.hold.borrow_mut().take(); // release the keep-alive
                         c.app.quit();
@@ -253,7 +261,22 @@ fn build(app: &adw::Application) {
         });
     }
 
-    // First paint + first scan.
+    // Close the popover when it loses focus (click outside / switch app), like a
+    // macOS transient popover. Only after it has actually been focused once, so a
+    // window that never grabs focus (some Wayland setups) does not vanish instantly.
+    {
+        let seen_active = std::cell::Cell::new(false);
+        controller.views.window.connect_is_active_notify(move |win| {
+            if win.is_active() {
+                seen_active.set(true);
+            } else if seen_active.replace(false) {
+                win.set_visible(false);
+            }
+        });
+    }
+
+    // First paint + first scan, then a quiet background update check.
     controller.rebuild();
     controller.refresh();
+    controller.check_updates(true);
 }
