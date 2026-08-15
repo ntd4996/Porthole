@@ -8,5 +8,10 @@ DerivedData/
 # Rust (Linux port)
 linux/target/
 
+# Windows port (Tauri)
+windows/src-tauri/target/
+windows/src-tauri/gen/
+windows/src-tauri/icons/
+
 # Local AI memory notes (not committed)
 .agent-memory/

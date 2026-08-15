@@ -1,0 +1,90 @@
+name: Windows
+
+# Builds the Tauri app (NSIS + MSI), signs updater artifacts, uploads installers
+# to the release, and publishes latest.json to gh-pages /windows for auto-update.
+on:
+  push:
+    tags: ["win-v*"]
+  pull_request:
+    branches: [main]
+    paths:
+      - "windows/**"
+      - ".github/workflows/windows.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: "windows/src-tauri -> target"
+
+      - name: Install Tauri CLI
+        run: cargo install tauri-cli --version "^2.0" --locked
+
+      - name: Generate icons
+        working-directory: windows/src-tauri
+        run: cargo tauri icon ../app-icon.png
+
+      - name: Build (Tauri)
+        working-directory: windows/src-tauri
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ""
+        run: cargo tauri build
+
+      - name: List bundles
+        shell: bash
+        run: ls -R windows/src-tauri/target/release/bundle
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: porthole-windows
+          path: |
+            windows/src-tauri/target/release/bundle/nsis/*-setup.exe
+            windows/src-tauri/target/release/bundle/nsis/*-setup.exe.sig
+            windows/src-tauri/target/release/bundle/msi/*.msi
+
+      - name: Assemble latest.json + upload to release
+        if: startsWith(github.ref, 'refs/tags/win-v')
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          TAG="${GITHUB_REF_NAME}"
+          VER="${TAG#win-v}"
+          SETUP=$(ls windows/src-tauri/target/release/bundle/nsis/*-setup.exe | head -1)
+          SIG=$(cat "${SETUP}.sig")
+          BASENAME=$(basename "$SETUP")
+          URL="https://github.com/${GITHUB_REPOSITORY}/releases/download/${TAG}/${BASENAME// /.}"
+          PUBDATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          mkdir -p win-pages
+          cat > win-pages/latest.json <<EOF
+          {"version":"${VER}","notes":"Porthole for Windows ${VER}","pub_date":"${PUBDATE}","platforms":{"windows-x86_64":{"signature":"${SIG}","url":"${URL}"}}}
+          EOF
+          echo "--- latest.json ---"; cat win-pages/latest.json
+          gh release upload "$TAG" \
+            windows/src-tauri/target/release/bundle/nsis/*-setup.exe \
+            windows/src-tauri/target/release/bundle/msi/*.msi \
+            --clobber
+
+      - name: Publish latest.json to gh-pages /windows
+        if: startsWith(github.ref, 'refs/tags/win-v')
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./win-pages
+          destination_dir: windows
+          keep_files: true
