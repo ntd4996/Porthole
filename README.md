@@ -97,3 +97,5 @@ Requires macOS 14+ and a recent Swift toolchain. The detection logic lives in th
 ## License
 
 [MIT](LICENSE) © Dat Nguyen
+
+Made by [Nguyễn Thành Đạt](https://datnt.dev).
